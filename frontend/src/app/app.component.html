@@ -1,0 +1,46 @@
+<div class="layout-wrapper" (click)="onLayoutClick($event)" [ngClass]="{'layout-static': isStatic(),
+                'layout-overlay': isOverlay(),
+                'layout-overlay-active': overlayMenuActive,
+                'layout-horizontal': isHorizontal(),
+                'layout-slim': isSlim(),
+                'layout-static-inactive': staticMenuDesktopInactive,
+                'layout-mobile-active': staticMenuMobileActive,
+                'layout-menu-dark':darkMenu,
+                'layout-menu-light':!darkMenu}">
+
+    <app-topbar [title]="titleMobile" *ngIf="logueado"></app-topbar>
+
+    <router-outlet></router-outlet>
+
+    <p-toast key="tst" [style]="{marginTop: '100px', width: '300px'}"></p-toast>
+
+</div>
+<p-dialog class="modal-content alerta" [(visible)]="display" style="width: 100%;" [modal]="true" [blockScroll]="true"
+    [closable]="false" [responsive]="true">
+    <p-header>
+        <h1>TIEMPO DE ACTIVIDAD VENCIDO</h1>
+    </p-header>
+    <div class="card">
+        <div class="card-content ui-fluid">
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <h3>Escribe tu contraseña para continuar</h3>
+                    <div style="margin-top: 15px;">
+                        <input type="password" maxlength="60" [(ngModel)]="pass" pInputText placeholder="Contraseña">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-top: 5%; float: right;">
+            <div class="p-col-12">
+                <button class="btn-polaris" type="button" pButton label="Aceptar" (click)="recuperarToken()"></button>
+            </div>
+            <br>
+        </div>
+
+    </div>
+</p-dialog>
+
+<div class="bar-open-menu" [ngClass]="{'active': staticMenuMobileActive}" (swipeleft)="controllerMove($event, true);"
+    (swiperight)="controllerMove($event, true);" (click)="controllerMove($event, staticMenuMobileActive);"></div>

@@ -1,0 +1,41 @@
+<div class="layout-main showFooter">
+    <div class="layout-content layout-top">
+        <div class="p-grid">
+            <div class="p-col-12">
+                <div class="card card-box">
+                    <span class="breadcrumb-desktop">
+                        <h1>
+                            <em class="title-icon  pi pi-home"></em>
+                            Bienvenido {{ user }}
+                        </h1>
+                        <app-breadcrumb></app-breadcrumb>
+                    </span>
+
+                    <perfect-scrollbar [disabled]="funcionesGenerales.getDevice()" class="content-overflow">
+                        <div class="inicioPolaris" *ngIf="imagenFondo || (widthScreen >= 200 && widthScreen <= 896)">
+                            <div class="inicioPo">
+                                <div class="circles1">
+                                    <div class="circ2"></div>
+                                </div>
+                                <div class="circles1 reflection">
+                                    <div class="circ2"></div>
+                                </div>
+                                <div class="terminalPoss" [innerHTML]="dataConteiner">
+                                </div>
+                            </div>
+                        </div>
+
+                    </perfect-scrollbar>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>
+<p-messages (click)="msgs = [];" class="modal-informative" [showTransitionOptions]="'0ms'"
+    [hideTransitionOptions]="'0ms'" [(value)]="msgs"></p-messages>
+
+<div class="layout-mask"></div>

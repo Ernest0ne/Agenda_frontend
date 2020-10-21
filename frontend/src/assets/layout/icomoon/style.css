@@ -1,0 +1,438 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?y747so');
+  src:  url('fonts/icomoon.eot?y747so#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?y747so') format('truetype'),
+    url('fonts/icomoon.woff?y747so') format('woff'),
+    url('fonts/icomoon.svg?y747so#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tecnicoOrigen:before {
+  content: "\e97a";
+}
+.icon-tecnicoDestino:before {
+  content: "\e97b";
+}
+.icon-Destino:before {
+  content: "\e97c";
+}
+.icon-origen:before {
+  content: "\e97d";
+}
+.icon-Estadisticas-de-tecnicos:before {
+  content: "\e958";
+}
+.icon-Geolocalizacion-tecnicos:before {
+  content: "\e959";
+}
+.icon-Historia-clinica:before {
+  content: "\e974";
+}
+.icon-Historico-de-movimiento:before {
+  content: "\e975";
+}
+.icon-Reportes-de-inventario:before {
+  content: "\e976";
+}
+.icon-Reportes-gestion-en-campo:before {
+  content: "\e977";
+}
+.icon-Ruta-stock-tecnicos:before {
+  content: "\e978";
+}
+.icon-Tiempo-para-laboratorio:before {
+  content: "\e979";
+}
+.icon-repuestos-y-accesorios:before {
+  content: "\e971";
+}
+.icon-sim-card:before {
+  content: "\e972";
+}
+.icon-terminales:before {
+  content: "\e973";
+}
+.icon-racking-de-tecnicos:before {
+  content: "\e96f";
+}
+.icon-reportes-de-laboratorio:before {
+  content: "\e970";
+}
+.icon-Falla-modelo-de-terminales:before {
+  content: "\e96e";
+}
+.icon-Actualizar-incidencia:before {
+  content: "\e952";
+}
+.icon-Asignar-TAT:before {
+  content: "\e95a";
+}
+.icon-Atencion-comercio-ANS:before {
+  content: "\e95b";
+}
+.icon-Cotizacion:before {
+  content: "\e95c";
+}
+.icon-Geolocalizacion-de-comercio:before {
+  content: "\e95d";
+}
+.icon-Gestion-de-bodegas:before {
+  content: "\e95e";
+}
+.icon-Incidencia-por-comercio:before {
+  content: "\e95f";
+}
+.icon-incidencias-anuladas:before {
+  content: "\e960";
+}
+.icon-Incidencias-cerradas:before {
+  content: "\e961";
+}
+.icon-Informacion-de-comercio:before {
+  content: "\e962";
+}
+.icon-Informacion-de-incidencia:before {
+  content: "\e963";
+}
+.icon-Instalacion-incidencia:before {
+  content: "\e964";
+}
+.icon-Permisos-de-bodega:before {
+  content: "\e965";
+}
+.icon-Re-Abrir-incidencia:before {
+  content: "\e966";
+}
+.icon-Registro-de-albaran:before {
+  content: "\e967";
+}
+.icon-Reportes-de-incidencias:before {
+  content: "\e968";
+}
+.icon-Retirar-incidencia:before {
+  content: "\e969";
+}
+.icon-Revisar-incidencia:before {
+  content: "\e96a";
+}
+.icon-Soporte-incidencia:before {
+  content: "\e96b";
+}
+.icon-Tiempos-para-cliente:before {
+  content: "\e96c";
+}
+.icon-Tipificacion-de-fallas:before {
+  content: "\e96d";
+}
+.icon-dashboard:before {
+  content: "\e94d";
+}
+.icon-accesorios:before {
+  content: "\e94e";
+}
+.icon-brand:before {
+  content: "\e94f";
+}
+.icon-ciudades:before {
+  content: "\e950";
+}
+.icon-comercio:before {
+  content: "\e951";
+}
+.icon-modelos-terminal:before {
+  content: "\e953";
+}
+.icon-paises:before {
+  content: "\e954";
+}
+.icon-permisos-ciudades:before {
+  content: "\e955";
+}
+.icon-prod-campo:before {
+  content: "\e956";
+}
+.icon-repuestos:before {
+  content: "\e957";
+}
+.icon-swap:before {
+  content: "\e94c";
+}
+.icon-logo .path1:before {
+  content: "\e94a";
+  color: rgb(0, 0, 0);
+}
+.icon-logo .path2:before {
+  content: "\e94b";
+  margin-left: -1em;
+  color: rgb(0, 136, 147);
+}
+.icon-bell:before {
+  content: "\e949";
+}
+.icon-fullscreen:before {
+  content: "\e948";
+}
+.icon-user:before {
+  content: "\e947";
+}
+.icon-send:before {
+  content: "\e946";
+}
+.icon-observation:before {
+  content: "\e945";
+}
+.icon-pointMenu:before {
+  content: "\e944";
+}
+.icon-etapas:before {
+  content: "\e941";
+}
+.icon-evidencia:before {
+  content: "\e942";
+}
+.icon-datafono:before {
+  content: "\e943";
+}
+.icon-ALISTAMIENTO:before {
+  content: "\e936";
+}
+.icon-COTIZACION:before {
+  content: "\e937";
+}
+.icon-DADO_BAJA:before {
+  content: "\e938";
+}
+.icon-DIAGNOSTICO:before {
+  content: "\e939";
+}
+.icon-GARANTIA:before {
+  content: "\e93a";
+}
+.icon-NUEVO:before {
+  content: "\e93b";
+}
+.icon-OPERATIVO:before {
+  content: "\e93c";
+}
+.icon-PREDIAGNOSTICO:before {
+  content: "\e93d";
+}
+.icon-QA:before {
+  content: "\e93e";
+}
+.icon-REPARACION:before {
+  content: "\e93f";
+}
+.icon-TRANSITO:before {
+  content: "\e940";
+}
+.icon-gpsFixed:before {
+  content: "\e935";
+}
+.icon-asignarInsidencia:before {
+  content: "\e928";
+}
+.icon-controlTerminales:before {
+  content: "\e929";
+}
+.icon-crearIncidencia:before {
+  content: "\e92e";
+}
+.icon-gestionExtras:before {
+  content: "\e92f";
+}
+.icon-gestionIncidencia:before {
+  content: "\e930";
+}
+.icon-gestionLaboratorio:before {
+  content: "\e931";
+}
+.icon-tiemposAtencion:before {
+  content: "\e932";
+}
+.icon-validarIncidencia:before {
+  content: "\e933";
+}
+.icon-visualizarIncidencia:before {
+  content: "\e934";
+}
+.icon-cancel:before {
+  content: "\e92c";
+}
+.icon-checked:before {
+  content: "\e92d";
+}
+.icon-map:before {
+  content: "\e92a";
+}
+.icon-warning:before {
+  content: "\e92b";
+}
+.icon-gestionInventario:before {
+  content: "\e927";
+}
+.icon-registrar:before {
+  content: "\e917";
+}
+.icon-gestionAlbaran:before {
+  content: "\e918";
+}
+.icon-recibir:before {
+  content: "\e919";
+}
+.icon-auditoria:before {
+  content: "\e91a";
+}
+.icon-actualizar:before {
+  content: "\e91b";
+}
+.icon-alta:before {
+  content: "\e91c";
+}
+.icon-asignar:before {
+  content: "\e91d";
+}
+.icon-baseDatos:before {
+  content: "\e91e";
+}
+.icon-buscar:before {
+  content: "\e91f";
+}
+.icon-configuracion:before {
+  content: "\e920";
+}
+.icon-crear:before {
+  content: "\e921";
+}
+.icon-darDeBaja:before {
+  content: "\e922";
+}
+.icon-gestionBodega:before {
+  content: "\e923";
+}
+.icon-gestionRoles:before {
+  content: "\e924";
+}
+.icon-gestionTerminales:before {
+  content: "\e925";
+}
+.icon-gestionUsuario:before {
+  content: "\e926";
+}
+.icon-gps:before {
+  content: "\e916";
+}
+.icon-addList:before {
+  content: "\e911";
+}
+.icon-clip:before {
+  content: "\e912";
+}
+.icon-download:before {
+  content: "\e913";
+}
+.icon-eraseList:before {
+  content: "\e914";
+}
+.icon-import:before {
+  content: "\e915";
+}
+.icon-xlsx .path1:before {
+  content: "\e903";
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path2:before {
+  content: "\e904";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path3:before {
+  content: "\e905";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path4:before {
+  content: "\e906";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path5:before {
+  content: "\e907";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path6:before {
+  content: "\e908";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path7:before {
+  content: "\e909";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path8:before {
+  content: "\e90a";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path9:before {
+  content: "\e90b";
+  margin-left: -0.888671875em;
+  color: rgb(65, 65, 65);
+}
+.icon-xlsx .path10:before {
+  content: "\e90c";
+  margin-left: -0.888671875em;
+  color: rgb(0, 151, 0);
+}
+.icon-xlsx .path11:before {
+  content: "\e90d";
+  margin-left: -0.888671875em;
+  color: rgb(254, 254, 254);
+}
+.icon-xlsx .path12:before {
+  content: "\e90e";
+  margin-left: -0.888671875em;
+  color: rgb(254, 254, 254);
+}
+.icon-xlsx .path13:before {
+  content: "\e90f";
+  margin-left: -0.888671875em;
+  color: rgb(254, 254, 254);
+}
+.icon-xlsx .path14:before {
+  content: "\e910";
+  margin-left: -0.888671875em;
+  color: rgb(254, 254, 254);
+}
+.icon-sad:before {
+  content: "\e900";
+}
+.icon-shock:before {
+  content: "\e901";
+}
+.icon-smile:before {
+  content: "\e902";
+}
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}

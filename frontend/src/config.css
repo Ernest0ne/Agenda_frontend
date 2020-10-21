@@ -1,0 +1,92 @@
+:root{
+    --topbar: linear-gradient(180deg, #022529 0%, #074148 148.65%, #022529 185%);
+    --tableHeader: linear-gradient(180deg, #022529 0%, #074148 52.6%, #022529 100%);
+    --table-th:linear-gradient(180deg, #022529 0%, #074148 52.6%, #022529 100%);
+    --scrollPanel: #022529;
+    --ground: rgba(230, 230, 230, 0.5);
+    --hover-submenu:rgba(26, 159, 170, 0.27);
+    --hover-submenu-shadow:rgba(26, 159, 170, 0.27);
+    --item-active-appMenu:#1596a0;
+    --item-active-appMenu-icon:#1596a0;
+    --extras-color:#089aa9;
+    --table-color:#008994;
+    --table-color-selected:#BCDADD;
+    --btnPrev:linear-gradient(90deg, #08383e 0%, rgb(24, 91, 99) 44.79%, #497c82 88.49%);
+    --bgtableBar:linear-gradient(180deg, #FFFFFF 0%, #AAAAAA 100%);
+    --text-color:#032D32;
+    --text-table-color:#032D32;
+    --text-user:#FFFFFF;
+    --open-incidences:linear-gradient(180deg, #FFFFFF 0%, #d9d9d9 100%);
+    --menuitem-text: #757575;
+    --submenu-text:#bdbdbd;
+    --lineBottom-menuitem:#ffffff17;
+    --mat-tab-label-color: black;
+    --mat-tab-label-color-active: black;
+    --ui-paginator-bgColor:#99bbbe;
+    --ui-paginator-color:#000000;
+    --ui-paginator-controls:#043034;
+    --app-menu-border-top:rgba(255,255,255,.2);
+    --btn-polaris-hover:#FFFFFF;
+    --searchBox:rgb(218, 228, 228);
+    --dropdown-item-selected:rgba(178, 213, 216, 0.63);
+    --dropdown-item-selected-color:#000000;
+    --login-box-background:white;
+    --hrline:#ffffff7d;
+    --iconinput-background: transparent;
+    --showPass-color:#144649;
+    --showPassUpdate-color:white;
+    --login-botton:linear-gradient(#fd1616 10%, #ee5b5c 10%);
+    --login-botton-hover:#d31327;
+    --login-botton-color:#212121;
+    --loginInf-background:#212121;
+    --forgotPass: white;
+    --borderInput: initial;
+    --border-layoutMenu: none;
+    --ps-thumb-y:linear-gradient(270deg, rgba(112, 182, 187, 0.35) 30%, rgba(4, 103, 111, 0.15) 64%);
+    --ps-thumb-y-hover:linear-gradient(270deg, rgba(112, 182, 187, 0.84) 30%, rgba(4, 103, 111, 0.85) 64%);
+    --terminal-color:red;
+    --circles-background:#017f89f0;
+    --circles-background2:#017f89db;
+    --update: #008994;
+    --password:black;
+    --folder-color: #f9b234;
+    --hover-notifi-background:linear-gradient(-194deg, #109aa538 53%, #6ccad2ab 82%);
+    --hover-controlTerminals: linear-gradient(-194deg, rgba(16, 154, 165, 0.16) 53%, rgba(108, 202, 210, 0.50) 82%);
+    --hover-notifi-color: black;
+    --login-botton-prev:#008994;
+    --btnUpload:linear-gradient(180.9deg, #FFFFFF 3.93%, rgba(253, 253, 253, 0.5) 84.02%, rgba(207, 240, 249, 0) 109.25%);
+    --border-color-btnUpload:#074148;
+    --btnUpload-color: transparent;
+    --tipe-incidences:#034951;
+    --chek-background:#074148;
+    --bar1:#074047;
+    --bar2:#0B6874;
+    --bar3:#028D9E;
+    --bar4:#06B9CF;
+    --bar5:#16DCF4;
+    --bar6:#BFD9DC;
+    --campoInf:#c7c7c7;
+    --cardOpacity:#ffffff0d;
+    --btn-disabled:linear-gradient(180deg, #022529 0%, #074148 52.6%, #022529 100%);
+    --btn-disabled-color:#ffffff;
+    --btn-form:linear-gradient(180deg, #022529 0%, #074148 52.6%, #022529 100%);
+    --btn-form-color:#032D32;
+    --btn-options-bg: linear-gradient(180.9deg, #FFFFFF 3.93%, rgba(253, 253, 253, 0.5) 84.02%, rgba(207, 240, 249, 0) 109.25%);
+    --btn-options-color: #000A0D;
+    --btn-options-borderColor:#032D32;    
+
+
+    /*-----> imagenes <------*/
+    --logo-app: url(assets/layout/images/logo-white.png);
+    --logo-app-pos: url(assets/layout/iconos/logoPosPolaris.svg);
+    --poweredBy: url(assets/layout/images/WPOSS-footer.svg);
+    --backgroundApp:url(assets/layout/images/login3.jpg);
+    
+    
+    
+    /* medotos */
+    
+    
+    
+    
+    }

@@ -1,0 +1,8 @@
+<div class="layout-profile" [ngClass]="{'layout-profile-active':active}">
+    <a href="#" (click)="onClick($event)" class="layout-profile-button flex">
+        <div class="layout-profile-userinfo anchoNombre">
+            <span class="layout-profile-name">{{ nombre }}</span>
+            <span class="layout-profile-role">{{ codigo }}</span>
+        </div>
+    </a>
+</div>

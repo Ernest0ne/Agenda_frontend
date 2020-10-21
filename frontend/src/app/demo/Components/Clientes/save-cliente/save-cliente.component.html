@@ -1,0 +1,208 @@
+<div class="layout-main">
+
+    <div class="layout-content layout-top">
+        <div class="p-grid">
+            <div class="p-col-12">
+                <div class="card card-box">
+                    <span class="breadcrumb-desktop">
+                        <h1>
+                            <em class="title-icon icon-gestionBodega"></em>
+                            GESTIÓN DE CLIENTES
+                        </h1>
+
+                    </span>
+
+
+                    <div class="md-content" flex md-scroll-y>
+                        <div>
+                            <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
+                                <div class="card">
+
+                                    <span class="breadcrumb-desktop">
+                                        <h1>LISTADO DE CLIENTES</h1>
+                                    </span>
+
+                                    <p-table class="VisActEli" emptyMessage="lista vacía" #dt [columns]="cols"
+                                        class="tableList" [value]="clientes" [paginator]="true" [rows]="10"
+                                        [rowsPerPageOptions]="[10,20,50,100,200]">
+                                        <ng-template pTemplate="caption">
+                                            <div class="ui-helper-clearfix">
+                                                <div class="p-grid">
+                                                    <div class="p-col-12 p-md-12 filter-container tableMenu">
+                                                        <div style="position:initial" class="flex table-search">
+
+                                                            <div class="p-col-12 p-md-12 flex organizarSelect">
+                                                                <input type="text" pInputText placeholder="Buscar"
+                                                                    (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                                                <button class="btn-polaris" type="button" pButton
+                                                                    label="Registrar" (click)="iniciarRegistro()"
+                                                                    icon="icommon pi pi-save"></button>
+                                                            </div>
+
+                                                            <div
+                                                                class="p-col-4 p-md-4 flex organizarSelect listExport childBefore">
+                                                                <label class="totalRegistros">Total registros:
+                                                                    {{totalRegistros}}</label>
+                                                                <button type="button" pButton
+                                                                    icon="icommon pi pi-download" iconPos="left"
+                                                                    label="Exportar excel" (click)="exportExcel()"
+                                                                    style="float:right"></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr>
+                                                <th *ngFor="let col of columns" class="{{col.class}}"
+                                                    scope="{{col.header}}">
+                                                    {{col.header}}
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th *ngFor="let col of columns" [ngSwitch]="col.field"
+                                                    scope="{{col.field}}">
+
+                                                    <input *ngSwitchCase="'cli_nombre'" style="width: 100%"
+                                                        placeholder="Buscar" pInputText type="text"
+                                                        (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                                        [(ngModel)]="filterCodigo"
+                                                        (keyup)="filterCodigo = funcionesGenerales.mayuscula(filterCodigo)">
+
+                                                    <input *ngSwitchCase="'cli_celular'" style="width: 100%"
+                                                        placeholder="Buscar" pInputText type="number"
+                                                        (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                                        [(ngModel)]="filterCelular">
+
+                                                    <input *ngSwitchCase="'cli_direccion'" style="width: 100%"
+                                                        placeholder="Buscar" pInputText type="text"
+                                                        (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                                        [(ngModel)]="filterDireccion"
+                                                        (keyup)="filterDireccion = funcionesGenerales.mayuscula(filterDireccion)">
+
+                                                    <p-calendar class="calendarModal" showButtonBar="true"
+                                                        *ngSwitchCase="'cli_fecha_creacion'" [style]="{'width':'100%'}"
+                                                        [locale]="funcionesGenerales.es" dateFormat="yy-mm-dd"
+                                                        [readonlyInput]="true" [touchUI]="true"
+                                                        placeholder="F. creación" [(ngModel)]="filterFechaCre"
+                                                        (onSelect)="dt.filter(funcionesGenerales.formatearFechaCorta($event), col.field, col.filterMatchMode);"
+                                                        (onClearClick)="dt.filter('', col.field, col.filterMatchMode);">
+                                                    </p-calendar>
+
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                            <tr [pSelectableRow]="rowData">
+                                                <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                                                    {{rowData[col.field]}}
+
+                                                    <div *ngSwitchCase="'actualizar'" class="centrarFlex">
+                                                        <button type="button" pButton
+                                                            (click)="iniciarActualizacion(rowData)"
+                                                            icon="pi pi-pencil"></button>
+                                                    </div>
+
+                                                    <div *ngSwitchCase="'visualizar'" class="centrarFlex">
+                                                        <button type="button" pButton (click)="verCliente(rowData)"
+                                                            icon="pi pi-eye"></button>
+                                                    </div>
+
+                                                    <div *ngSwitchCase="'eliminar'" class="centrarFlex">
+                                                        <button type="button" pButton (click)="eliminarCliente(rowData)"
+                                                            icon="pi pi-trash"></button>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+
+                                </div>
+                            </perfect-scrollbar>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
+    [closable]="false" [responsive]="true">
+    <p-header>
+        <h1>{{ title }} CLIENTE</h1>
+    </p-header>
+    <div class="layout-content">
+        <div class="card">
+            <div class="card-content ui-fluid">
+                <div class="card card-w-title">
+
+                    <div class="p-grid">
+                        <div class="p-col-12">
+                            <div class="p-grid">
+
+                                <div class="p-lg-6">
+                                    <h3>Nombre<strong style="color:Red;">*</strong></h3>
+                                    <input type="text" [(ngModel)]="Cliente.cli_nombre" minlength="2" maxlength="50"
+                                        pInputText placeholder="Nombre" requerido="true" class="form-control"
+                                        (input)="funcionesGenerales.validarTextoA($event);" [(disabled)]="viwer">
+                                </div>
+
+                                <div class="p-lg-6">
+                                    <h3>Celular<strong style="color:Red;">*</strong></h3>
+                                    <input type="text" [(ngModel)]="Cliente.cli_celular" minlength="10" maxlength="10"
+                                        pInputText placeholder="Celular" requerido="true" class="form-control"
+                                        (input)="funcionesGenerales.validarNumeros($event);" [(disabled)]="viwer">
+                                </div>
+
+                                <div class="p-lg-6">
+                                    <h3>Dirección<strong style="color:Red;">*</strong></h3>
+                                    <input type="text" [(ngModel)]="Cliente.cli_direccion" minlength="2" maxlength="50"
+                                        pInputText placeholder="Dirección" requerido="true" class="form-control"
+                                        (input)="funcionesGenerales.validarDireccion($event);" [(disabled)]="viwer">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="center-flex input-field col 12" *ngIf="!viwer && Cliente.cli_id == ''">
+                    <button class="btn-polaris" type="button" pButton label="Registrar" (click)="registrarCliente()"
+                        icon="icommon pi pi-save"></button>
+                </div>
+                <div class="center-flex input-field col 12" *ngIf="!viwer && Cliente.cli_id != ''">
+                    <button class="btn-polaris" type="button" pButton label="Actualizar" (click)="actualizarCliente()"
+                        icon="icommon pi pi-pencil"></button>
+                </div>
+                <!-- aca en disable va la validacion del formulario -->
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="icommon pi pi-arrow-left" (click)="display=false"
+            (click)="limpiarFormulario()" label="Volver"></button>
+    </p-footer>
+</p-dialog>
+
+
+
+<p-confirmDialog class="confirmDialogModal" header="Confirmar" icon="fa fa-question-circle" #cd>
+    <p-footer>
+        <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
+            (click)="cd.accept()"></button>
+        <button class="btn-polaris" type="button" pButton icon="icon-cancel" style="text-align: center" label="No"
+            (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<app-footer></app-footer>
+<div class="layout-mask"></div>

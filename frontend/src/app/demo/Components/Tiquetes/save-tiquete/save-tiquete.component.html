@@ -1,0 +1,543 @@
+<div class="layout-main">
+
+    <div class="layout-content layout-top">
+        <div class="p-grid">
+            <div class="p-col-12">
+                <div class="card card-box">
+                    <span class="breadcrumb-desktop">
+                        <h1>
+                            <em class="title-icon icon-gestionBodega"></em>
+                            GESTÍON DE TICKETS
+                        </h1>
+
+                    </span>
+
+
+                    <div class="md-content" flex md-scroll-y>
+                        <div>
+                            <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
+                                <div class="card">
+
+                                    <span class="breadcrumb-desktop">
+                                        <h1>LISTADO DE TICKETS</h1>
+                                    </span>
+
+                                    <p-table class="VisActEli" emptyMessage="lista vacía" #dt [columns]="cols"
+                                        class="tableList" [value]="tiquetes" [paginator]="true" [rows]="10"
+                                        [rowsPerPageOptions]="[10,20,50,100,200]">
+                                        <ng-template pTemplate="caption">
+                                            <div class="ui-helper-clearfix">
+                                                <div class="p-grid">
+                                                    <div class="p-col-12 p-md-12 filter-container tableMenu">
+                                                        <div style="position:initial" class="flex table-search">
+
+                                                            <div class="p-col-12 p-md-12 flex organizarSelect">
+                                                                <input type="text" pInputText placeholder="Buscar"
+                                                                    (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                                                <button class="btn-polaris" type="button" pButton
+                                                                    label="Registrar" (click)="iniciarRegistro()"
+                                                                    icon="icommon pi pi-save"></button>
+                                                            </div>
+
+                                                            <div
+                                                                class="p-col-4 p-md-4 flex organizarSelect listExport childBefore">
+                                                                <label class="totalRegistros">Total registros:
+                                                                    {{totalRegistros}}</label>
+                                                                <button type="button" pButton
+                                                                    icon="icommon pi pi-download" iconPos="left"
+                                                                    label="Exportar excel" (click)="exportExcel()"
+                                                                    style="float:right"></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr style="padding-bottom: 20px !important;">
+                                                <th *ngFor="let col of columns" class="{{col.class}}"
+                                                    scope="{{col.header}}">
+                                                    {{col.header}}
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th *ngFor="let col of columns" [ngSwitch]="col.field"
+                                                    scope="{{col.field}}">
+
+                                                    <input *ngSwitchCase="'tiq_codigo'" style="width: 100%"
+                                                        placeholder="Buscar" pInputText type="text"
+                                                        (input)="dt.filter(funcionesGenerales.validarNumeros($event), col.field, col.filterMatchMode)"
+                                                        [(ngModel)]="filterCodigo"
+                                                        (keyup)="filterCodigo = funcionesGenerales.validarNumeros($event)">
+
+                                                    <p-multiSelect *ngSwitchCase="'tiq_cliente_nombre'"
+                                                        [options]="clientes" [style]="{'width':'100%'}"
+                                                        optionLabel="cli_nombre" defaultLabel="Clientes"
+                                                        (onChange)="dt.filter(funcionesGenerales.formatoFiltro(filterClliente), col.field, 'in')"
+                                                        selectedItemsLabel="{0} Referencias seleccionadas"
+                                                        [(ngModel)]="filterClliente">
+                                                    </p-multiSelect>
+
+
+                                                    <p-multiSelect *ngSwitchCase="'tiq_planta'" [options]="plantas"
+                                                        [style]="{'width':'100%'}" optionLabel="rege_nombre"
+                                                        defaultLabel="Plantas"
+                                                        (onChange)="dt.filter(funcionesGenerales.formatoFiltro(filterPlanta), col.field, 'in')"
+                                                        selectedItemsLabel="{0} Materiales seleccionados"
+                                                        [(ngModel)]="filterPlanta">
+                                                    </p-multiSelect>
+
+
+                                                    <p-multiSelect *ngSwitchCase="'tiq_color'" [options]="modelos"
+                                                        [style]="{'width':'100%'}" optionLabel="mod_nombre"
+                                                        defaultLabel="Modelos"
+                                                        (onChange)="dt.filter(funcionesGenerales.formatoFiltro(filterModelo), col.field, 'in')"
+                                                        selectedItemsLabel="{0} Colores seleccionados"
+                                                        [(ngModel)]="filterModelo">
+                                                    </p-multiSelect>
+
+                                                    <input *ngSwitchCase="'tiq_pares'" style="width: 100%" pInputText
+                                                        type="text" placeholder="Buscar"
+                                                        (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                                        [(ngModel)]="filterPares">
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                            <tr [pSelectableRow]="rowData">
+                                                <td *ngFor="let col of columns" [ngSwitch]="col.field">
+
+                                                    <p *ngSwitchCase="'tiq_pares'"
+                                                        style="text-align: right; color: black;">
+                                                        {{rowData[col.field]}}</p>
+
+                                                    <p *ngSwitchDefault style="color: black;">{{rowData[col.field]}}
+                                                    </p>
+
+                                                    <div *ngSwitchCase="'visualizar'" class="centrarFlex">
+                                                        <button type="button" pButton (click)="verTiquete(rowData)"
+                                                            icon="pi pi-eye"></button>
+                                                    </div>
+                                                    <div *ngSwitchCase="'actualizar'" class="centrarFlex">
+                                                        <button type="button" pButton
+                                                            (click)="iniciarActualizacion(rowData)"
+                                                            icon="pi pi-pencil"></button>
+                                                    </div>
+                                                    <div *ngSwitchCase="'eliminar'" class="centrarFlex">
+                                                        <button type="button" pButton (click)="eliminarTiquete(rowData)"
+                                                            icon="pi pi-trash"></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+
+                                </div>
+                            </perfect-scrollbar>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
+    [closable]="false" [responsive]="true">
+    <p-header>
+        <h1>{{ title }} TIQUETE <strong style="margin-left: 1%;"> {{Tiquete.tiq_codigo}} </strong> </h1>
+    </p-header>
+    <div class="layout-content">
+        <div class="card">
+            <div class="card-content ui-fluid">
+                <div class="card card-w-title">
+
+
+                    <div class="p-grid">
+                        <div class="p-col-6" style="margin-top: 2%;">
+                            <div class="p-grid">
+
+                                <div class="p-lg-6">
+                                    <span class="ui-float-label">
+                                        <p-dropdown emptyFilterMessage="Sin resultados" [options]="clientes"
+                                            [(ngModel)]="selectedCliente" [autoWidth]="true" optionLabel="cli_nombre"
+                                            placeholder=" " [(disabled)]="viwer" filter='true'>
+                                        </p-dropdown>
+                                        <label for="float-input">Cliente</label>
+                                    </span>
+                                </div>
+
+                                <div class="p-lg-6">
+                                    <span class="ui-float-label">
+                                        <p-dropdown emptyFilterMessage="Sin resultados" [options]="modelos"
+                                            [(ngModel)]="selectedModelo" [autoWidth]="true" optionLabel="mod_nombre"
+                                            placeholder=" " (ngModelChange)="cargarInformacionModelo()"
+                                            [(disabled)]="viwer" filter='true'>
+                                        </p-dropdown>
+                                        <label for="float-input">Modelo</label>
+                                    </span>
+                                </div>
+
+                                <div [ngClass]="(registro)?'p-lg-4':'p-lg-6'" style="margin-top: 2%;">
+                                    <span class="ui-float-label">
+                                        <input id="float-input" type="text" pInputText [(ngModel)]="selectedReferencia"
+                                            disabled="true">
+                                        <label for="float-input">Referencia</label>
+                                    </span>
+                                </div>
+
+                                <div class="p-lg-4" [ngClass]="(registro)?'p-lg-4':'p-lg-6'" style="margin-top: 2%;">
+                                    <span class="ui-float-label">
+                                        <input id="float-input" type="text" pInputText [(ngModel)]="selectedPlanta"
+                                            disabled="true">
+                                        <label for="float-input">Planta</label>
+                                    </span>
+                                </div>
+
+
+                                <div *ngIf="registro" class="p-lg-4" style="margin-top: 2%;">
+                                    <span class="ui-float-label">
+                                        <input type="number" pInputText [(ngModel)]="multiplicador" max="5" min='1'
+                                            (change)="validarMultiplicador($event);"
+                                            (keyup)="validarMultiplicador($event);" (click)="iniciarMultiplicacion()">
+                                        <label for="float-input">Multiplicar ticket</label>
+                                    </span>
+                                </div>
+
+                                <div class="p-lg-12" style="margin-top: 2%;">
+                                    <span class="ui-float-label">
+                                        <textarea rows="2" cols="30" pInputTextarea style="resize: none;"
+                                            [(ngModel)]="tiq_observacion" [(disabled)]="viwer"
+                                            placeholder=" "></textarea>
+                                        <label for="float-input">Observación</label>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="p-col-6" style="margin-top: 2%;">
+                            <div class="p-grid">
+                                <p style="margin-left: 3%;">Materiales del modelo</p>
+                                <div class="p-lg-12" style="overflow-y: scroll; max-height: 150px;">
+                                    <p-dataTable [value]="MaterialesModelo" [paginator]="true" [rows]="5"
+                                        expandableRows="true" emptyMessage="lista vacía" selectionMode="single"
+                                        class="tableMin">
+                                        <p-header>
+
+                                        </p-header>
+                                        <p-column field="nombre" header="Nombre"></p-column>
+                                        <p-column field="tipo" header="Tipo"></p-column>
+                                        <p-column field="cantidad" header="Cant par"></p-column>
+                                        <p-column field="cantidadTotal" header="Cant total"></p-column>
+                                        <p-column field="restante_real" header="Disponible"></p-column>
+                                    </p-dataTable>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="p-col-12">
+
+                            <div style="display: inline-block;">
+                                <h3>Tallas</h3>
+                            </div>
+
+                            <div
+                                style="display: inline-block; float: right; background-color: #bbdefb; padding: 0 1% 0 1%; border-radius: 8%;">
+                                <h3>Total Pares: {{totalPares}}</h3>
+                            </div>
+
+                            <div class="ui-g ui-fluid">
+                                <div class="p-lg-1" *ngIf="pares[0] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">21</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[0]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[1] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">22</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[1]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[2] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">23</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[2]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[3] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">24</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[3]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[4] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">25</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[4]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[5] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">26</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[5]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[6] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">27</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[6]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[7] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">28</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[7]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[8] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">29</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[8]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[9] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">30</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[9]" (change)="contarPares();"
+                                            [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[10] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">31</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[10]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[11]  != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">32</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[11]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[12] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">33</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[12]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[13] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">34</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[13]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[14] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">35</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[14]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[15] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">36</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[15]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[16] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">37</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[16]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[17] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">38</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[17]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[18] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">39</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[18]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[19] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">40</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[19]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[20] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">41</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[20]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                                <div class="p-lg-1" *ngIf="pares[21] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">42</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[21]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+
+                                <div class="p-lg-1" *ngIf="pares[22] != 'a'">
+                                    <div class="ui-inputgroup">
+                                        <span class="ui-inputgroup-addon">
+                                            <p style="line-height: 1.25;">43</p>
+                                        </span>
+                                        <input type="number" pInputText [(ngModel)]="pares[22]"
+                                            (change)="contarPares();" [(disabled)]="viwer">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="p-col-10" style="text-align: center;" *ngIf="viwer" id="content">
+                            <ngx-barcode [bc-element-type]="elementType" [bc-value]="value" [bc-display-value]="true"
+                                [bc-format]="format" [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="height"
+                                [bc-display-value]="displayValue" [bc-font-options]="fontOptions" [bc-font]="font"
+                                [bc-text-align]="textAlign" [bc-text-position]="textPosition"
+                                [bc-text-margin]="textMargin" [bc-font-size]="fontSize" [bc-background]="background"
+                                [bc-margin]="margin" [bc-margin-top]="marginTop" [bc-margin-bottom]="marginBottom"
+                                [bc-margin-left]="marginLeft" [bc-margin-right]="marginRight"></ngx-barcode>
+                        </div>
+
+                        <div class="p-col-2">
+                            <div class="center-flex input-field col 12" *ngIf="viwer">
+                                <button class="btn-polaris" type="button" style="margin-top: 15%;" pButton
+                                    label="Imprimir" (click)="gPDF3()" icon="icommon pi pi-print"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="center-flex input-field col 12" *ngIf="!viwer && Tiquete.tiq_id == ''">
+                    <button class="btn-polaris" type="button" pButton label="Registrar" (click)="registrarTiquete()"
+                        icon="icommon pi pi-save"></button>
+                </div>
+                <div class="center-flex input-field col 12" *ngIf="!viwer && Tiquete.tiq_id != ''">
+                    <button class="btn-polaris" type="button" pButton label="Actualizar" (click)="actualizarTiquete()"
+                        icon="icommon pi pi-pencil"></button>
+                </div>
+                <!-- aca en disable va la validacion del formulario -->
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="icommon pi pi-arrow-left" (click)="display=false"
+            (click)="limpiarFormulario()" label="Volver"></button>
+    </p-footer>
+</p-dialog>
+
+
+
+<p-confirmDialog class="confirmDialogModal" header="Confirmar" icon="fa fa-question-circle" #cd>
+    <p-footer>
+        <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
+            (click)="cd.accept()"></button>
+        <button class="btn-polaris" type="button" pButton icon="icon-cancel" style="text-align: center" label="No"
+            (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<app-footer></app-footer>
+<div class="layout-mask"></div>

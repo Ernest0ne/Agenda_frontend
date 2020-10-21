@@ -1,0 +1,252 @@
+<div class="layout-main">
+
+  <div class="layout-content layout-top">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <div class="card card-box">
+          <span class="breadcrumb-desktop">
+            <h1>
+              <em class="title-icon icon-gestionBodega"></em>
+              MATERIALES
+            </h1>
+
+          </span>
+
+
+          <div class="md-content" flex md-scroll-y>
+            <div>
+              <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
+                <div class="card">
+
+
+                  <div class="p-grid">
+                    <div class="p-col-4">
+                      <span class="breadcrumb-desktop">
+                        <h1>LISTADO DE MATERIALES</h1>
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <p-table class="VisActEli" emptyMessage="lista vacía" #dt [columns]="cols" class="tableList"
+                    [value]="materiales" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,50,100,200]">
+                    <ng-template pTemplate="caption">
+                      <div class="ui-helper-clearfix">
+                        <div class="p-grid">
+                          <div class="p-col-12 p-md-12 filter-container tableMenu">
+                            <div style="position:initial" class="flex table-search">
+
+                              <div class="p-col-12 p-md-12 flex organizarSelect">
+                                <input type="text" pInputText placeholder="Buscar"
+                                  (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                <button class="btn-polaris" type="button" pButton label="Registrar"
+                                  (click)="iniciarRegistro()" icon="icommon pi pi-save"></button>
+                              </div>
+
+                              <div class="p-col-4 p-md-4 flex organizarSelect listExport childBefore">
+                                <label class="totalRegistros">Total registros:
+                                  {{totalRegistros}}</label>
+                                <button type="button" pButton icon="icommon pi pi-download" iconPos="left"
+                                  label="Exportar excel" (click)="exportExcel()" style="float:right"></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" class="{{col.class}}" scope="{{col.header}}">
+                          {{col.header}}
+                        </th>
+                      </tr>
+                      <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field" scope="{{col.field}}">
+
+                          <input *ngSwitchCase="'mat_nombre'" style="width: 100%" placeholder="Buscar" pInputText
+                            type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            [(ngModel)]="filterCodigo"
+                            (keyup)="filterCodigo = funcionesGenerales.mayuscula(filterCodigo)">
+
+                          <p-multiSelect *ngSwitchCase="'mat_color'" [options]="colores" [style]="{'width':'100%'}"
+                            defaultLabel="Colores" optionLabel="rege_nombre"
+                            (onChange)="dt.filter(funcionesGenerales.formatoFiltro(filterColor), col.field, 'in')"
+                            selectedItemsLabel="{0} Colores seleccionados" [(ngModel)]="filterColor">
+                          </p-multiSelect>
+
+                          <p-multiSelect *ngSwitchCase="'mat_tipo'" [options]="tipoMaterial" [style]="{'width':'100%'}"
+                            defaultLabel="Tipo material" (onChange)="dt.filter(filterTipoMaterial, col.field, 'in')"
+                            selectedItemsLabel="{0} Tipos seleccionados" [(ngModel)]="filterTipoMaterial">
+                          </p-multiSelect>
+
+                          <input *ngSwitchCase="'mat_cantidad'" style="width: 100%" placeholder="Buscar" pInputText
+                            type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            [(ngModel)]="filterCantidad"
+                            (keyup)="filterCantidad = funcionesGenerales.mayuscula(filterCantidad)">
+
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                      <tr [pSelectableRow]="rowData">
+                        <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                          {{rowData[col.field]}}
+
+                          <div *ngSwitchCase="'actualizar'" class="centrarFlex">
+                            <button type="button" pButton (click)="iniciarActualizacion(rowData)"
+                              icon="pi pi-pencil"></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
+  [closable]="false" [responsive]="true">
+  <p-header>
+    <h1>{{ title }} {{selectedTipo}}</h1>
+  </p-header>
+  <div class="layout-content">
+    <div class="card">
+      <div class="card-content ui-fluid">
+        <div class="card card-w-title">
+
+          <div class="p-grid" style="margin-top: 2%;">
+            <div class="p-col-12">
+              <div class="p-grid">
+
+                <div class="p-lg-12" style="margin-top: 1%;">
+                  <div class="p-grid">
+
+
+                    <div class="p-lg-4">
+                      <span class="ui-float-label">
+                        <p-dropdown emptyFilterMessage="Sin resultados" [options]="tipoMaterial" filter='true'
+                          [(ngModel)]="selectedTipoMaterial" (ngModelChange)="listarNombresMateriales()"
+                          [autoWidth]="true" placeholder=" " [(disabled)]="viwer">
+                        </p-dropdown>
+                        <label for="float-input">Tipo de material</label>
+                      </span>
+                    </div>
+
+
+                    <div class="p-lg-6" *ngIf='!nuevoMaterial'>
+                      <span class="ui-float-label">
+                        <p-dropdown emptyFilterMessage="Sin resultados" [options]="nombreMateriales" filter='true'
+                          [(ngModel)]="rege_nombre" (ngModelChange)="seleccionarNombreMaterial()" [autoWidth]="true"
+                          placeholder=" " [(disabled)]="viwer">
+                        </p-dropdown>
+                        <label for="float-input">Selecciona un nombre</label>
+                      </span>
+                    </div>
+
+                    <div class="p-lg-6" *ngIf='nuevoMaterial'>
+                      <div class="ui-inputgroup">
+                        <span class="ui-float-label" style="width: 100%;">
+                          <input id="float-input" type="text" [(ngModel)]="rege_nombre" minlength="2" maxlength="50"
+                            pInputText (input)="funcionesGenerales.validarTextoA($event);" [(disabled)]="viwer">
+                          <label for="float-input">Escribe un nombre</label>
+                        </span>
+                        <button pButton type="button" icon="pi pi-refresh" class="ui-button-warn"
+                          (click)="cancelarNuevoNombreMaterial()"></button>
+                      </div>
+                    </div>
+
+
+                    <div class="p-lg-4" *ngIf='!nuevoColor && regColor'>
+                      <span class="ui-float-label">
+                        <p-dropdown emptyFilterMessage="Sin resultados" [options]="nombreColores"
+                          [(ngModel)]="selectedColor" filter='true' [autoWidth]="true"
+                          (ngModelChange)="seleccionarNombreColor()" placeholder=" " [(disabled)]="viwer">
+                        </p-dropdown>
+                        <label for="float-input">Selecciona un color</label>
+                      </span>
+                    </div>
+
+                    <div class="p-lg-4" *ngIf='nuevoColor && regColor'>
+                      <div class="ui-inputgroup">
+                        <span class="ui-float-label" style="width: 100%;">
+                          <input id="float-input" type="text" [(ngModel)]="selectedColor" minlength="2" maxlength="50"
+                            pInputText (input)="funcionesGenerales.validarTextoA($event);" [(disabled)]="viwer">
+                          <label for="float-input">Escribe un color</label>
+                        </span>
+                        <button pButton type="button" icon="pi pi-refresh" class="ui-button-warn"
+                          (click)="cancelarNuevoNombreColor()"></button>
+                      </div>
+                    </div>
+
+                    <div class="p-lg-4" *ngIf='regMetros'>
+                      <span class="ui-float-label">
+                        <input id="float-input" type="text" size="30" maxlength='10' pInputText [(ngModel)]="cantidad"
+                          (keyup)="formatearCantidadMetros();">
+                        <label for="float-input">Cantidad en metros</label>
+                      </span>
+                    </div>
+
+                    <div class="p-lg-4" *ngIf='!regMetros'>
+                      <span class="ui-float-label">
+                        <input id="float-input" type="text" size="30" maxlength='12' pInputText [(ngModel)]="cantidad"
+                          (keyup)="formatearCantidadUnidades();">
+                        <label for="float-input">Cantidad de unidades</label>
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+      <div class="card-action">
+        <div class="center-flex input-field col 12" *ngIf="!viwer && Material.mat_id == ''">
+          <button class="btn-polaris" type="button" pButton label="Registrar" (click)="registrarMaterial()"
+            icon="icommon pi pi-save"></button>
+        </div>
+        <div class="center-flex input-field col 12" *ngIf="!viwer && Material.mat_id != ''">
+          <button class="btn-polaris" type="button" pButton label="Actualizar" (click)="actuaizarMaterial()"
+            icon="icommon pi pi-pencil"></button>
+        </div>
+        <!-- aca en disable va la validacion del formulario -->
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="icommon pi pi-arrow-left" (click)="display=false" (click)="limpiarFormulario()"
+      label="Volver"></button>
+  </p-footer>
+</p-dialog>
+
+
+
+<p-confirmDialog class="confirmDialogModal" header="Confirmar" icon="fa fa-question-circle" #cd>
+  <p-footer>
+    <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
+      (click)="cd.accept()"></button>
+    <button class="btn-polaris" type="button" pButton icon="icon-cancel" style="text-align: center" label="No"
+      (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<app-footer></app-footer>
+<div class="layout-mask"></div>

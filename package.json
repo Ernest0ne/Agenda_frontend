@@ -1,0 +1,20 @@
+{
+  "name": "polaris-core-project-frontent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://daquin22@bitbucket.org/WPOSS/polaris-core-project-frontent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/WPOSS/polaris-core-project-frontent#readme",
+  "dependencies": {
+    "@angular/cli": "^8.3.23",
+    "xlsexport": "^1.5.2"
+  }
+}

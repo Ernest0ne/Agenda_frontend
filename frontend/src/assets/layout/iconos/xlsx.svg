@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="56.4446mm" height="62.9392mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1735 1935"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#373435;stroke-width:6.14838}
+    .fil1 {fill:#009700}
+    .fil0 {fill:#414141}
+    .fil2 {fill:#FEFEFE;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0" x="289" y="217" width="866.264" height="65.0714" rx="34" ry="33"/>
+  <rect class="fil0" x="289" y="389" width="866.264" height="65.0714" rx="34" ry="33"/>
+  <g id="_2787274447632">
+   <path class="fil0" d="M322 552l325 0 0 65 -325 0c-18,0 -33,-15 -33,-33l0 0c0,-18 15,-32 33,-32z"/>
+   <path class="fil0" d="M322 724l325 0 0 65 -325 0c-18,0 -33,-15 -33,-33l0 0c0,-18 15,-32 33,-32z"/>
+   <path class="fil0" d="M322 886l325 0 0 65 -325 0c-18,0 -33,-14 -33,-32l0 0c0,-18 15,-33 33,-33z"/>
+  </g>
+  <rect class="fil0" x="289" y="1049" width="866.264" height="65.0714" rx="34" ry="33"/>
+  <rect class="fil0" x="289" y="1215" width="866.264" height="65.0714" rx="34" ry="33"/>
+  <rect class="fil0" x="728" y="546" width="411" height="401" rx="69" ry="70"/>
+  <path class="fil0" d="M38 1325l49 0 0 -1207c0,-65 53,-118 118,-118l1039 0c64,0 117,53 117,118l0 1207 197 0 0 -962c0,-56 -47,-103 -104,-103l-54 0 0 -63 117 0c65,0 118,53 118,117l0 1011 62 0c21,0 38,17 38,38l0 534c0,21 -17,38 -38,38l-1659 0c-21,0 -38,-17 -38,-38l0 -534c0,-21 17,-38 38,-38zm127 0l1119 0 0 -1158c0,-57 -47,-104 -104,-104l-912 0c-57,0 -103,47 -103,104l0 1158zm-75 59l1555 0c17,0 31,14 31,31l0 430c0,16 -14,30 -31,30l-1555 0c-17,0 -30,-14 -30,-30l0 -430c0,-17 13,-31 30,-31z"/>
+  <rect class="fil1 str0" x="60" y="1384" width="1616" height="491" rx="35" ry="31"/>
+  <polygon class="fil2" points="1152,1761 1286,1626 1153,1499 1263,1499 1340,1574 1413,1499 1511,1499 1390,1620 1538,1761 1427,1761 1336,1672 1250,1761 "/>
+  <path class="fil2" d="M881 1687c23,10 43,17 59,21 16,4 32,6 47,6 16,0 28,-3 38,-8 9,-4 14,-10 14,-18 0,-10 -17,-23 -51,-36 -5,-2 -9,-4 -12,-5l-25 -10c-25,-10 -43,-21 -55,-33 -12,-12 -18,-26 -18,-42 0,-21 11,-38 34,-52 23,-13 52,-20 88,-20 14,0 28,1 44,3 15,3 32,6 51,11l0 61c-18,-8 -35,-14 -51,-18 -16,-5 -30,-7 -42,-7 -12,0 -22,2 -29,6 -8,4 -11,9 -11,15 0,5 2,9 6,13 5,4 11,8 20,11l44 17c37,14 61,27 74,39 13,12 19,27 19,43 0,26 -12,46 -37,62 -25,16 -58,23 -100,23 -14,0 -29,-1 -45,-3 -17,-2 -35,-5 -54,-9l-8 -70z"/>
+  <polygon class="fil2" points="618,1761 618,1499 708,1499 708,1705 854,1705 854,1761 "/>
+  <polygon class="fil2" points="198,1761 332,1626 199,1499 309,1499 386,1574 459,1499 557,1499 436,1620 584,1761 473,1761 382,1672 296,1761 "/>
+ </g>
+</svg>

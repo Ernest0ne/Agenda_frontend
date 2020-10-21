@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Polaris Core </title>
+    <link id="layout-css" rel="stylesheet" type="text/css" href="../../../../../../assets/layout/css/layout-blue.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../../assets/pages/primeng.min.css">
+    <link id="theme-css" rel="stylesheet" type="text/css" href="../../../../../../assets/theme/blue/theme-accent.css">
+</head>
+
+<body class="login-body">
+    <div class="login-content">
+        <div class="login-box">
+            <div class="logoP logo-company">
+            </div>
+            <p class="loginInf">Bienvenido</p>
+            <p class="loginInf">Ingrese usuario y contraseña.</p>
+            <hr class="hrLine">
+            <div class="login-input-wrapper iconInput">
+                <em class="pi pi-user"></em>
+                <div class="divInput">
+                    <input type="text" autocomplete="off" #usuario="ngModel"
+                        [(ngModel)]="userService.selectedUser.user_email" placeholder="Usuario"
+                        class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+                </div>
+            </div>
+            <div class="login-input-wrapper iconInput">
+                <em class="pi pi-key"></em>
+                <div class="divInput">
+                    <input type="{{typeInput}}" autocomplete="off" #password="ngModel"
+                        [(ngModel)]="userService.selectedUser.user_password" placeholder="Contraseña"
+                        class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+                </div>
+                <em class="pi pi-eye showPass loginP" (click)="showPassword()"></em>
+            </div>
+            <hr class="hrLine">
+            <button type="button" (click)="loginUser()"
+                class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text ui-c">Iniciar sesión</span>
+            </button>
+            <p-toast [style]="{marginTop: '80px'}"></p-toast>
+            <a (click)="mostarModalRestablecer()" class="centrarFlex cursorHand">¿Ha olvidado su
+                contraseña?</a>
+        </div>
+    </div>
+
+    <p-toast key="tst" [style]="{marginTop: '100px', width: '300px'}"></p-toast>
+
+    <div class="logoPoweredBy"></div>
+</body>
+
+</html>
+
+<p-dialog class="modal-content resetPass" [(visible)]="restablecerContrasena" [modal]="true" [style]="{'width':'50%'}"
+    [blockScroll]="true" [closable]="false" [responsive]="true">
+    <p-header>
+        <h1>RESTABLECER CONTRASEÑA</h1>
+
+    </p-header>
+    <div class="card">
+        <div class="p-grid">
+            <div class="p-col-12 flex">
+                <input type="text" autocomplete="off" maxlength="20" placeholder="Código de usuario"
+                    class="ui-inputtext ui-widget inputRestablecer" (keyup.enter)="consultarUsuario()"
+                    [(ngModel)]="codigoUsuario" (keyup)="mayuscula()">
+                <button type="button" (click)="consultarUsuario()"
+                    class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btnRestablecer">
+                    <span class="ui-button-text ui-c">Buscar</span>
+                </button>
+            </div>
+            <div class="p-col 12 result" *ngIf="divLabel">
+                <div class="campoInf">
+                    <em class="icon-user"></em>
+                    <div>
+                        <h3>Código usuario</h3>
+                        <h4>{{codigoMostrar}}</h4>
+                    </div>
+                </div>
+                <div class="campoInf">
+                    <em class="pi pi-envelope"></em>
+                    <div>
+                        <h3>Correo</h3>
+                        <h4>{{correoMostrar}}</h4>
+                    </div>
+                </div>
+                <div class="campoInf">
+                    <em class="pi"
+                        [ngClass]="{'pi-check':estadoMostrar === 'ACTIVO','pi-times':estadoMostrar === 'INACTIVO'}"></em>
+                    <div>
+                        <h3>Estado</h3>
+                        <h4>{{estadoMostrar}}</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="p-col-12 centrarFlex" *ngIf="btnRestablecer">
+        <a type="button" pButton label="Enviar correo de recuperación" (click)="enviarCorreo()"></a>
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="icommon pi pi-arrow-left closeBtn" (click)="limpiarModal()"
+            label="Volver"></button>
+    </p-footer>
+</p-dialog>
