@@ -45,7 +45,7 @@ export class ConfigColor {
         '#A5ACAD'  // Dashboard
     ];
 
-    nameProject: string = "Polaris Core";
+    nameProject: string = "AgendApp";
 
     constructor() { }
 
