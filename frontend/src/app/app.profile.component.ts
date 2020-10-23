@@ -40,9 +40,8 @@ import * as SecureLS from 'secure-ls';
 export class AppProfileComponent implements OnInit {
     readonly URL_API = environment.url;
     active: boolean;
-    nombre = 'Hola';
-    codigo = 'daQuin';
     ls = new SecureLS({ encodingType: 'aes' });
+    nombre = this.ls.get('usuario')
     onClick(event) {
         this.active = !this.active;
         event.preventDefault();

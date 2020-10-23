@@ -23,23 +23,9 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
     ls = new SecureLS({ encodingType: 'aes' });
 
     constructor(public app: AppComponent) { }
-    company = this.ls.get('company');
-    roles = this.ls.get('roles');
-
-    rol = [];
-    menu = [];
-    totalPermios = [];
-    icons = [];
 
     ngOnInit() {
-        this.roles = this.ls.get('roles');
         this.app.profileMode = 'inline';
-
-        if (this.ls.get('menu') == "") {
-            this.ls.set('menu', JSON.stringify(this.menu))
-        } else {
-            //this.menu = JSON.parse(this.ls.get('menu'));
-        }
 
         this.modelGrouped = [
             {
@@ -50,7 +36,10 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
             },
             {
                 label: 'MENÚ', icon: 'pi pi-fw pi-cog',
-                items: this.menu
+                items: [
+                    { label: 'AGENDAS', icon: 'pi pi-fw pi-calendar', routerLink: ['/Shoes'] },
+                    { label: 'PROFESORES', icon: 'pi pi-fw pi-users', routerLink: ['/Shoes'] }
+                ]
             }
         ];
 

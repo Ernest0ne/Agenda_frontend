@@ -16,15 +16,15 @@ import { NominaComponent } from './demo/Components/Empleados/nomina/nomina.compo
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
-    { path: 'Shoes', component: EmptyDemoComponent },
-    { path: 'Shoes/GestiondeTickets', component: SaveTiqueteComponent },
-    { path: 'Shoes/RegistrosGenerales', component: SaveRegistrosGeneralesComponent },
-    { path: 'Shoes/GestiondeClientes', component: SaveClienteComponent },
-    { path: 'Shoes/Empleados', component: SaveEmpleadoComponent },
-    { path: 'Shoes/PagarTickets', component: PayTiqueteComponent },
-    { path: 'Shoes/TabladePrecios', component: PriceTiqueteComponent },
-    { path: 'Shoes/Materiales', component: SaveMaterialesComponent },
-    { path: 'Shoes/Nomina', component: NominaComponent }
+    { path: 'AgendApp', component: EmptyDemoComponent },
+    { path: 'AgendApp/GestiondeTickets', component: SaveTiqueteComponent },
+    { path: 'AgendApp/RegistrosGenerales', component: SaveRegistrosGeneralesComponent },
+    { path: 'AgendApp/GestiondeClientes', component: SaveClienteComponent },
+    { path: 'AgendApp/Empleados', component: SaveEmpleadoComponent },
+    { path: 'AgendApp/PagarTickets', component: PayTiqueteComponent },
+    { path: 'AgendApp/TabladePrecios', component: PriceTiqueteComponent },
+    { path: 'AgendApp/Materiales', component: SaveMaterialesComponent },
+    { path: 'AgendApp/Nomina', component: NominaComponent }
 
 
 

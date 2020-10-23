@@ -126,7 +126,7 @@ app-footer>.layout-footer {
 }
 
 app-footer>.layout-footer em {
-    color: #109aa5;
+    color: #6d1913;
 }
 
 app-footer>.layout-footer i:hover {
@@ -1052,7 +1052,7 @@ a.layout-menu-button.active:before {
     width: 222px;
     height: 100%;
     position: absolute;
-    background-image: var(--logo-app);
+/*     background-image: var(--logo-app); */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

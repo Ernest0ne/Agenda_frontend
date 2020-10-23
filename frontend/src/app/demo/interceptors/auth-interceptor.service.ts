@@ -5,6 +5,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { SokectIoService } from '../Services/sokect-io.service';
 import { UserService } from '../Services/user.service';
+import { FuncionesGenerales } from '../Components/FuncionesGenerales/funcionesGenerales';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,13 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   private ls = new SecureLS({ encodingType: 'aes' });
 
-  constructor(private sokectIoService: SokectIoService, public userService: UserService) { }
+  constructor(private sokectIoService: SokectIoService, public userService: UserService, public funcionesGenerales: FuncionesGenerales) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let request = req;
 
     if (this.ls.get('token').data) {
-      if(request.url != 'https://jsonip.com'){
+      if (request.url != 'https://jsonip.com') {
         request = req.clone({
           setHeaders: {
             authenticator: this.ls.get('token').data + '',
@@ -42,6 +43,10 @@ export class AuthInterceptorService implements HttpInterceptor {
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           event = event.clone({ body: event.body });
+          if (!event.body.status) {
+            this.funcionesGenerales.showErrorViaToast(event.body.message)
+            return null;
+          }
         }
         return event;
       })

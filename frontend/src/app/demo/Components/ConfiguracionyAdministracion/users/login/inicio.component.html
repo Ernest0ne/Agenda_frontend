@@ -23,25 +23,25 @@
             <p class="loginInf">Bienvenido</p>
             <p class="loginInf">Ingrese usuario y contraseña.</p>
             <hr class="hrLine">
-            <div class="login-input-wrapper iconInput">
-                <em class="pi pi-user"></em>
-                <div class="divInput">
-                    <input type="text" autocomplete="off" #usuario="ngModel"
-                        [(ngModel)]="userService.selectedUser.user_email" placeholder="Usuario"
-                        class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+            <form [formGroup]="form">
+                <div class="login-input-wrapper iconInput">
+                    <em class="pi pi-user"></em>
+                    <div class="divInput">
+                        <input type="text" autocomplete="off" formControlName="usu_login" placeholder="Usuario"
+                            class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+                    </div>
                 </div>
-            </div>
-            <div class="login-input-wrapper iconInput">
-                <em class="pi pi-key"></em>
-                <div class="divInput">
-                    <input type="{{typeInput}}" autocomplete="off" #password="ngModel"
-                        [(ngModel)]="userService.selectedUser.user_password" placeholder="Contraseña"
-                        class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+                <div class="login-input-wrapper iconInput">
+                    <em class="pi pi-key"></em>
+                    <div class="divInput">
+                        <input type="{{typeInput}}" autocomplete="off" formControlName="usu_clave"
+                            placeholder="Contraseña" class="ui-inputtext ui-widget" (keyup.enter)="loginUser()">
+                    </div>
+                    <em class="pi pi-eye showPass loginP" (click)="showPassword()"></em>
                 </div>
-                <em class="pi pi-eye showPass loginP" (click)="showPassword()"></em>
-            </div>
+            </form>
             <hr class="hrLine">
-            <button type="button" (click)="loginUser()"
+            <button type="button" [disabled]="!form.valid" (click)="loginUser()"
                 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
                 <span class="ui-button-text ui-c">Iniciar sesión</span>
             </button>

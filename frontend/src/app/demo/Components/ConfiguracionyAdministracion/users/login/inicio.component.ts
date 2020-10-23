@@ -5,8 +5,10 @@ import { ConfirmationService } from 'primeng/primeng';
 import { UserService } from '../../../../Services/user.service';
 import { AppComponent } from '../../../../../app.component';
 import * as SecureLS from 'secure-ls';
-import { SokectIoService } from '../../../../Services/sokect-io.service';
-import { FuncionesGenerales } from '../../../FuncionesGenerales/funcionesGenerales';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginModelAdapter } from 'src/app/demo/models/loogin';
+
+
 
 @Component({
     selector: 'app-inicio',
@@ -17,28 +19,36 @@ import { FuncionesGenerales } from '../../../FuncionesGenerales/funcionesGeneral
 export class InicioComponent implements OnInit {
     typeInput = 'password';
     ls = null;
+    restablecerContrasena = false;
+    form: FormGroup;
+    login: any
 
     constructor(
         public userService: UserService,
         private funciones: AppComponent,
+        private adapter: LoginModelAdapter
     ) { }
-
-
-
 
     ngOnInit() {
         this.ls = new SecureLS({ encodingType: 'aes' });
         this.funciones.ocultarMenu();
-      /*   const app_topbar_menu = document.querySelector('.layout-menu-dark');
-        app_topbar_menu.classList.add('layout-static-inactive'); */
+        this.form = new FormGroup({
+            usu_clave: new FormControl({ value: null, disabled: false }, [Validators.required]),
+            usu_login: new FormControl({ value: null, disabled: false }, [Validators.required]),
+        });
     }
 
     loginUser() {
 
-        this.ls.set('token', { data: 'token' });
-        this.ls.set('rol', 'rol');
-        this.ls.set('name', 'nombre');
-        location.href = '#/Shoes/';
+        this.login = this.form.value;
+
+        this.userService.login(this.adapter.adaptObjectSend(this.login)).subscribe(resp => {
+            this.ls.set('token', resp.token);
+            this.ls.set('usuario', resp.nombre);
+            location.href = '#/AgendApp/';
+        });
+
+
     }
 
 
@@ -51,5 +61,14 @@ export class InicioComponent implements OnInit {
         }
     }
 
+
+    mostarModalRestablecer() {
+        this.restablecerContrasena = true;
+    }
+
+
+    limpiarModal() {
+        this.restablecerContrasena = false;
+    }
 
 }

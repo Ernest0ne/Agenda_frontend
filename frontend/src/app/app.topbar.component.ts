@@ -64,15 +64,9 @@ export class AppTopBarComponent implements OnInit {
 
     ngOnInit() {
 
-//        this.cargarNotificaciones();
+        //        this.cargarNotificaciones();
         /* this.recargarNotificaciones(); */
         this.validar_tiempo_sesion();
-
-   
-        this.documents = this.sokectIoService.documents;
-        this._docSub = this.sokectIoService.currentDocument.subscribe(
-            doc => (this.currentDoc = doc.id)
-        );
     }
 
 

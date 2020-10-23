@@ -86,6 +86,9 @@ import { MessageService } from 'primeng/api';
 import { AccessComponent } from './demo/Views/access.component';
 import { DataTableModule } from 'primeng/primeng';
 //import { FindAllTerminalComponent } from './demo/Components/ConfiguracionyAdministracion/terminals/find-all/find-all.component';
+import { UtilitiesConfigDates } from './demo/utilities/utilities-config-dates.service';
+import { UtilitiesConfigNumber } from './demo/utilities/utilities-config-number.service';
+import { UtilitiesConfigString } from './demo/utilities/utilities-config-string.service';
 
 import { UserIdleModule } from 'angular-user-idle';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -258,7 +261,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MessageService,
         FuncionesGenerales,
         Svg,
-        ConfigColor
+        ConfigColor,
+        UtilitiesConfigDates,
+        UtilitiesConfigNumber,
+        UtilitiesConfigString,
     ],
     bootstrap: [AppComponent]
 })
