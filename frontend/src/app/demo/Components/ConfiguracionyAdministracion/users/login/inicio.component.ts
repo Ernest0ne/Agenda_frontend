@@ -6,7 +6,7 @@ import { UserService } from '../../../../Services/user.service';
 import { AppComponent } from '../../../../../app.component';
 import * as SecureLS from 'secure-ls';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginModelAdapter } from 'src/app/demo/models/loogin';
+import { LoginModelAdapter } from 'src/app/demo/models/login';
 
 
 
@@ -43,9 +43,11 @@ export class InicioComponent implements OnInit {
         this.login = this.form.value;
 
         this.userService.login(this.adapter.adaptObjectSend(this.login)).subscribe(resp => {
-            this.ls.set('token', resp.token);
-            this.ls.set('usuario', resp.usuario);
-            location.href = '#/AgendApp/';
+            if (resp.status) {
+                this.ls.set('token', resp.token);
+                this.ls.set('usuario', resp.usuario);
+                location.href = '#/AgendApp/';
+            }
         });
 
 

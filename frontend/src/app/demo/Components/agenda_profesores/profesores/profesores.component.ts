@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as SecureLS from 'secure-ls';
 import { AppComponent } from 'src/app/app.component';
+import { ProfesorService } from 'src/app/demo/Services/profesor.service';
 import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
 import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales';
@@ -29,13 +30,15 @@ export class ProfesoresComponent implements OnInit {
     private formBuilder: FormBuilder,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString
+    private utilitiesString: UtilitiesConfigString,
+    private profesorService: ProfesorService
   ) { }
 
   ngOnInit() {
     this.app.mostarMenu();
     this.cargarFormulario()
     this.cargarTabla()
+
   }
 
 
@@ -58,4 +61,37 @@ export class ProfesoresComponent implements OnInit {
     ];
   }
 
+/* 
+  get() {
+    this.profesorService.listar().subscribe(res => {
+
+      this.profesores = this.utilitiesString.sortAscending(this.groupAdapter.adaptList(res['data']), 'name');
+      let g = this.groups.find(c => c.name === this.utilitiesString.name_default_group);
+
+
+      if (this.utilitiesString.ls.get('group') != '') {
+        let group = JSON.parse(this.utilitiesString.ls.get('group'));
+
+        this.group = this.groups.filter(c => c.id === group.id)[0];
+      } else {
+        this.group = g ? g : this.groups[0];
+      }
+
+      if (this.grupo !== undefined) {
+        let aux = this.groups.filter((c => c.id === this.grupo))
+        if (aux.length === 1) {
+          this.group = aux[0];
+        }
+      }
+
+      if (this.group) {
+        this.getTerminals();
+      }
+
+      this.app.toggleBlockingEnd();
+    }, err => {
+      this.app.toggleBlockingEnd();
+    });
+  }
+ */
 }
