@@ -31,14 +31,14 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
             {
                 label: 'PÁGINA PRINCIPAL', icon: 'pi pi-fw pi-home',
                 items: [
-                    { label: 'INICIO', icon: 'pi pi-fw pi-home', routerLink: ['/Shoes'] }
+                    { label: 'INICIO', icon: 'pi pi-fw pi-home', routerLink: ['/AgendApp'] }
                 ]
             },
             {
                 label: 'MENÚ', icon: 'pi pi-fw pi-cog',
                 items: [
-                    { label: 'AGENDAS', icon: 'pi pi-fw pi-calendar', routerLink: ['/Shoes'] },
-                    { label: 'PROFESORES', icon: 'pi pi-fw pi-users', routerLink: ['/Shoes'] }
+                    { label: 'AGENDAS', icon: 'pi pi-fw pi-calendar', routerLink: ['/AgendApp/Agendas'] },
+                    { label: 'PROFESORES', icon: 'pi pi-fw pi-users', routerLink: ['/AgendApp/Profesores'] }
                 ]
             }
         ];

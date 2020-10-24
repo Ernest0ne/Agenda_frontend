@@ -41,7 +41,8 @@ export class AppProfileComponent implements OnInit {
     readonly URL_API = environment.url;
     active: boolean;
     ls = new SecureLS({ encodingType: 'aes' });
-    nombre = this.ls.get('usuario')
+    usuario = this.ls.get('usuario');
+    nombre = this.usuario.usu_nombre + " " + this.usuario.usu_apellido
     onClick(event) {
         this.active = !this.active;
         event.preventDefault();

@@ -118,6 +118,9 @@ import { PayTiqueteComponent } from './demo/Components/Tiquetes/pay-tiquete/pay-
 import { PriceTiqueteComponent } from './demo/Components/Tiquetes/price-tiquete/price-tiquete.component';
 import { SaveMaterialesComponent } from './demo/Components/Registros generales/save-materiales/save-materiales.component';
 import { NominaComponent } from './demo/Components/Empleados/nomina/nomina.component';
+import { ProfesoresComponent } from './demo/Components/agenda_profesores/profesores/profesores.component';
+import { ConfigTables } from './demo/utilities/config-tables.service';
+import { ExcelService } from './demo/utilities/excel.service';
 
 const config: SocketIoConfig = { url: environment.urlSockect, options: { autoConnect: false } };
 
@@ -237,7 +240,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PayTiqueteComponent,
         PriceTiqueteComponent,
         SaveMaterialesComponent,
-        NominaComponent
+        NominaComponent,
+        ProfesoresComponent
     ],
     providers: [
         Title,
@@ -265,6 +269,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         UtilitiesConfigDates,
         UtilitiesConfigNumber,
         UtilitiesConfigString,
+        ExcelService,
+        ConfigTables
     ],
     bootstrap: [AppComponent]
 })

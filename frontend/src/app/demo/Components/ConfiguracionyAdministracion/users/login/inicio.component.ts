@@ -44,7 +44,7 @@ export class InicioComponent implements OnInit {
 
         this.userService.login(this.adapter.adaptObjectSend(this.login)).subscribe(resp => {
             this.ls.set('token', resp.token);
-            this.ls.set('usuario', resp.nombre);
+            this.ls.set('usuario', resp.usuario);
             location.href = '#/AgendApp/';
         });
 

@@ -9236,3 +9236,20 @@ perfect-scrollbar.showGraphic .ps-content>div {
     margin-left: 1% !important;
     float: right;
 }
+
+body .ui-toolbar {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 0.857em 1em;
+    color: #000000;
+  }
+
+.ui-toolbar-group-right i{
+      font-size: 45px;
+      color: #801f18;
+      cursor: pointer;
+  }
+
+body .ui-table .ui-sortable-column .ui-sortable-column-icon {
+    color: #212121!important;
+}
