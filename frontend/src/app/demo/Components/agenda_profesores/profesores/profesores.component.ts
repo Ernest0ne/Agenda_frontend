@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as SecureLS from 'secure-ls';
 import { AppComponent } from 'src/app/app.component';
+import { ProfesorModelAdapter } from 'src/app/demo/models/profesor';
 import { ProfesorService } from 'src/app/demo/Services/profesor.service';
 import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
@@ -16,12 +17,16 @@ import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales'
 })
 export class ProfesoresComponent implements OnInit {
 
+  display: boolean;
   form: FormGroup;
   profesores = []
+  profesor: any
   cols = [];
   public Cliente: any
   ls = new SecureLS({ encodingType: 'aes' });
   totalRegistros = 0;
+  departamentos = [];
+  facultades = [];
 
   constructor(
     public configTables: ConfigTables,
@@ -31,13 +36,20 @@ export class ProfesoresComponent implements OnInit {
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
     private utilitiesString: UtilitiesConfigString,
-    private profesorService: ProfesorService
-  ) { }
+    private profesorService: ProfesorService,
+    private adapter: ProfesorModelAdapter,
+
+  ) {
+    this.display = false;
+    this.departamentos = this.utilitiesString.departamentos;
+    this.facultades = this.utilitiesString.facultades;
+  }
 
   ngOnInit() {
     this.app.mostarMenu();
     this.cargarFormulario()
     this.cargarTabla()
+    this.get()
 
   }
 
@@ -61,37 +73,68 @@ export class ProfesoresComponent implements OnInit {
     ];
   }
 
-/* 
+
   get() {
     this.profesorService.listar().subscribe(res => {
-
-      this.profesores = this.utilitiesString.sortAscending(this.groupAdapter.adaptList(res['data']), 'name');
-      let g = this.groups.find(c => c.name === this.utilitiesString.name_default_group);
-
-
-      if (this.utilitiesString.ls.get('group') != '') {
-        let group = JSON.parse(this.utilitiesString.ls.get('group'));
-
-        this.group = this.groups.filter(c => c.id === group.id)[0];
-      } else {
-        this.group = g ? g : this.groups[0];
-      }
-
-      if (this.grupo !== undefined) {
-        let aux = this.groups.filter((c => c.id === this.grupo))
-        if (aux.length === 1) {
-          this.group = aux[0];
-        }
-      }
-
-      if (this.group) {
-        this.getTerminals();
-      }
-
-      this.app.toggleBlockingEnd();
+      this.profesores = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'pro_nombre');
     }, err => {
-      this.app.toggleBlockingEnd();
     });
   }
- */
+
+  delete(data) {
+    this.confirmationService.confirm({
+      message: this.utilitiesString.msgConfirmDelete + 'el profesor ' + data.pro_nombre + '?',
+      accept: () => {
+        this.profesorService.eliminar(data.pro_id).subscribe(resp => {
+          this.funcionesGenerales.showSuccessViaToast(resp.message)
+          this.get();
+        }, err => {
+          this.funcionesGenerales.showSuccessViaToast(err.error['message']);
+        });
+      }
+    });
+  }
+
+
+  addOrEdit(data) {
+    this.show(data);
+  }
+
+  show(data) {
+    this.display = true;
+    this.profesor = data;
+    this.setData(data);
+  }
+
+  setData(data) {
+    this.form.get('pro_nombre').setValue(data ? data.pro_nombre : null);
+    this.form.get('pro_apellido').setValue(data ? data.pro_apellido : null);
+    this.form.get('pro_correo').setValue(data ? data.pro_correo : null);
+    this.form.get('pro_facultad').setValue(data ? data.pro_facultad : null);
+    this.form.get('pro_departamento').setValue(data ? data.pro_departamento : null);
+  }
+
+  save() {
+    let obj = this.form.value;
+    if (this.profesor) {
+      obj['pro_id'] = this.profesor.pro_id;
+      this.profesorService.actualizar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
+        this.funcionesGenerales.showSuccessViaToast(resp.message)
+        this.get();
+        this.display = false;
+      });
+    } else {
+      this.profesorService.registrar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
+        this.get();
+        this.display = false;
+        this.funcionesGenerales.showSuccessViaToast(resp.message)
+      });
+    }
+  }
+
+  limpiarFormulario() {
+    this.profesor = undefined;
+    this.form.reset()
+  }
+
 }

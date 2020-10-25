@@ -4,22 +4,13 @@
         <div class="p-grid">
             <div class="p-col-12">
                 <div class="card card-box">
-                    <!--        <span class="breadcrumb-desktop">
-                        <h1>
-                            <em class="title-icon icon-gestionBodega"></em>
-                            GESTIÓN DE PROFESORES
-                        </h1>
-
-                    </span> -->
-
-
                     <div class="md-content" flex md-scroll-y>
                         <div>
                             <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
                                 <div class="card">
 
                                     <span class="breadcrumb-desktop">
-                                        <h1>LISTADO DE PROFESORES</h1>
+                                        <h1>GESTIÓN DE PROFESORES</h1>
                                     </span>
 
                                     <div class="search-box ui-inputgroup">
@@ -34,16 +25,16 @@
                                             <h3 class="total-record">Total registros: {{profesores.length}}</h3>
                                         </div>
                                         <div class="ui-toolbar-group-right">
-                                            <i class="pi pi-plus-circle" (click)="addOrEdit(null)"></i>
+                                            <i class="pi pi-plus-circle" title="Nuevo" (click)="addOrEdit(null)"></i>
                                         </div>
                                     </p-toolbar>
-                                    <p-table #dt [columns]="cols" [value]="clients"
+                                    <p-table #dt [columns]="cols" [value]="profesores"
                                         [responsive]="configTables.responsive" [rows]="configTables.rowCount"
                                         [rowsPerPageOptions]="configTables.rowsPerPage" selectionMode="single">
                                         <ng-template pTemplate="header" let-columns>
                                             <tr>
-                                                <th *ngFor="let col of columns; let i = index" id="head-clients-{{i}}"
-                                                    [pSortableColumn]="col.field">
+                                                <th *ngFor="let col of columns; let i = index"
+                                                    id="head-profesores-{{i}}" [pSortableColumn]="col.field">
                                                     {{col.header}}
                                                     <p-sortIcon *ngIf="col.field !=='actions'" [field]="col.field">
                                                     </p-sortIcon>
@@ -56,13 +47,12 @@
                                                     <span *ngIf="col.field !== 'actions'">
                                                         {{rowData[col.field]}}
                                                     </span>
-                                                    <span *ngIf="col.field === 'actions'">
-                                                        <button class="btn-icon-only-default" pTooltip="Visualizar"
-                                                            type="button" pButton icon="icon-eye" iconPos="left"
-                                                            (click)="addOrEdit(rowData)"></button>
-                                                        <button class="btn-icon-only-gray" (click)="delete(rowData)"
-                                                            type="button" pButton pTooltip="Eliminar" icon="icon-bin"
-                                                            iconPos="left"></button>
+                                                    <span *ngIf="col.field === 'actions'"
+                                                        style="text-align: center;     display: block;">
+                                                        <i class="pi pi-eye pi-actions" title="Ver"
+                                                            (click)="addOrEdit(rowData)"></i>
+                                                        <i class="pi pi-trash pi-actions" title="Elminar"
+                                                            (click)="delete(rowData)"></i>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -90,7 +80,8 @@
 <p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
     [closable]="false" [responsive]="true">
     <p-header>
-        <h1>{{ title }} CLIENTE</h1>
+        <h1>INFORMACIÓN DEL PROFESOR</h1>
+        <hr>
     </p-header>
     <div class="layout-content">
         <div class="card">
@@ -99,56 +90,57 @@
 
                     <div class="p-grid">
                         <div class="p-col-12">
-                            <div class="p-grid">
 
-                                <form [formGroup]="form">
-                                    <div class="ui-g-12 ui-md-12 ui-lg-12">
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                                            <span class="ui-float-label">
-                                                <input id="pro_nombre"
-                                                    (input)="utilitiesString.convertOnlyText($event, form.get('pro_nombre'))"
-                                                    maxlength="60" type="text" pInputText formControlName="pro_nombre">
-                                                <label>Nombre<span class="required-field">*</span></label>
-                                            </span>
-                                        </div>
-
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                                            <span class="ui-float-label">
-                                                <input id="pro_apellido"
-                                                    (input)="utilitiesString.convertOnlyText($event, form.get('pro_apellido'))"
-                                                    maxlength="60" type="text" pInputText
-                                                    formControlName="pro_apellido">
-                                                <label>Nombre<span class="required-field">*</span></label>
-                                            </span>
-                                        </div>
-
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                                            <span class="ui-float-label">
-                                                <input id="pro_correo" maxlength="60" type="text" pInputText
-                                                    formControlName="pro_correo">
-                                                <label>Nombre<span class="required-field">*</span></label>
-                                            </span>
-                                        </div>
-
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                                            <span class="ui-float-label">
-                                                <p-dropdown [options]="statusOptions" [autoDisplayFirst]="false"
-                                                    formControlName="pro_facultad"></p-dropdown>
-                                                <label>Estado<span class="required-field">*</span></label>
-                                            </span>
-                                        </div>
-
-                                        <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                                            <span class="ui-float-label">
-                                                <p-dropdown [options]="statusOptions" [autoDisplayFirst]="false"
-                                                    formControlName="pro_departamento"></p-dropdown>
-                                                <label>Estado<span class="required-field">*</span></label>
-                                            </span>
-                                        </div>
-
+                            <form [formGroup]="form">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                                        <span class="ui-float-label">
+                                            <input id="pro_nombre"
+                                                (input)="utilitiesString.convertOnlyText($event, form.get('pro_nombre'))"
+                                                maxlength="60" type="text" pInputText formControlName="pro_nombre">
+                                            <label>Nombre<span class="required-field">*</span></label>
+                                        </span>
                                     </div>
-                                </form>
-                            </div>
+
+                                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                                        <span class="ui-float-label">
+                                            <input id="pro_apellido"
+                                                (input)="utilitiesString.convertOnlyText($event, form.get('pro_apellido'))"
+                                                maxlength="60" type="text" pInputText formControlName="pro_apellido">
+                                            <label>Apellido<span class="required-field">*</span></label>
+                                        </span>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                                        <span class="ui-float-label">
+                                            <input id="pro_correo" maxlength="60" type="text" pInputText
+                                                formControlName="pro_correo">
+                                            <label>Correo<span class="required-field">*</span></label>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <div class="ui-g-12 ui-md-12 ui-lg-12">
+
+                                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                                        <span class="ui-float-label">
+                                            <p-dropdown [options]="departamentos" [autoDisplayFirst]="false"
+                                                formControlName="pro_departamento"></p-dropdown>
+                                            <label>Departamento<span class="required-field">*</span></label>
+                                        </span>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                                        <span class="ui-float-label">
+                                            <p-dropdown [options]="facultades" [autoDisplayFirst]="false"
+                                                formControlName="pro_facultad"></p-dropdown>
+                                            <label>Facultad<span class="required-field">*</span></label>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -156,8 +148,9 @@
 
                 </div>
             </div>
-            <div class="card-action">
-                <button pButton label="Guardar" [disabled]="!form.valid" (click)="save()" icon="pi pi-save"></button>
+            <div class="card-action" style="text-align: center;">
+                <button pButton label="Guardar" style="background-color: #aa2e25; border: 1px solid #4d120d;"
+                    [disabled]="!form.valid" (click)="save()" icon="pi pi-save"></button>
             </div>
         </div>
     </div>
@@ -167,9 +160,9 @@
     </p-footer>
 </p-dialog>
 
+<p-toast [style]="{marginTop: '70px'}"></p-toast>
 
-
-<p-confirmDialog class="confirmDialogModal" header="Confirmar" icon="fa fa-question-circle" #cd>
+<p-confirmDialog class="confirmDialogModal" icon="fa fa-question-circle" #cd>
     <p-footer>
         <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
             (click)="cd.accept()"></button>
@@ -177,6 +170,5 @@
             (click)="cd.reject()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
 <app-footer></app-footer>
 <div class="layout-mask"></div>

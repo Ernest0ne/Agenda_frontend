@@ -19,13 +19,11 @@ export class AuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let request = req;
 
-    if (this.ls.get('token').data) {
+    if (this.ls.get('token')) {
       if (request.url != 'https://jsonip.com') {
         request = req.clone({
           setHeaders: {
-            authenticator: this.ls.get('token').data + '',
-            usercodeid: this.ls.get('user_code'),
-            remote: !req.headers.get('remote') ? '0' : '1',
+            authenticator: this.ls.get('token'),
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
           }

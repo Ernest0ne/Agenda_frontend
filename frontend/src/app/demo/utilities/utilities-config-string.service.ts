@@ -101,6 +101,17 @@ export class UtilitiesConfigString {
         '#e3cf80'
     ];
 
+    public departamentos = [
+        { label: 'ACTUALIZADO', value: 'ACTUALIZADO' },
+        { label: 'DESACTUALIZADO', value: 'DESACTUALIZADO' }
+    ];
+
+
+    public facultades = [
+        { label: 'ACTUALIZADO', value: 'ACTUALIZADO' },
+        { label: 'DESACTUALIZADO', value: 'DESACTUALIZADO' }
+    ];
+
     public optionsChartBeginAtZero = {
         scales: {
             yAxes: [{

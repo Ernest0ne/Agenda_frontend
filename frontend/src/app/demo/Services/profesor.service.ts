@@ -18,18 +18,31 @@ export class ProfesorService {
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get(this.URL_API + 'Profesor');
+    return this.http.get(this.URL_API + 'Profesor') as any;
   }
 
   registrar(body) {
-    return this.http.post(this.URL_API + 'Cliente', body);
+    return this.http.post(this.URL_API + 'Profesor', body) as any;
+  }
+
+
+  actualizar(body) {
+    return this.http.put(this.URL_API + 'Profesor', body) as any;
+  }
+
+
+  eliminar(id) {
+    const httpOptions = {
+      headers: new HttpHeaders({ pro_id: '' + id })
+    };
+    return this.http.delete(this.URL_API + 'Profesor', httpOptions) as any;
   }
 
   buscarById(id) {
     const httpOptions = {
       headers: new HttpHeaders({ id: '' + id })
     };
-    return this.http.get(this.URL_API + 'Cliente/getById', httpOptions);
+    return this.http.get(this.URL_API + 'Profesor/getById', httpOptions) as any;
   }
 
 }
