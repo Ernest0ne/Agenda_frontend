@@ -38,7 +38,9 @@ export class AppMenuComponent implements OnInit, AfterViewInit {
                 label: 'MENÚ', icon: 'pi pi-fw pi-cog',
                 items: [
                     { label: 'AGENDAS', icon: 'pi pi-fw pi-calendar', routerLink: ['/AgendApp/Agendas'] },
-                    { label: 'PROFESORES', icon: 'pi pi-fw pi-users', routerLink: ['/AgendApp/Profesores'] }
+                    { label: 'CITAS', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/AgendApp/Citas'] },
+                    { label: 'PROFESORES', icon: 'pi pi-fw pi-users', routerLink: ['/AgendApp/Profesores'] },
+                    { label: 'NOTAS', icon: 'pi pi-fw pi-tags', routerLink: ['/AgendApp/Notas'] }
                 ]
             }
         ];

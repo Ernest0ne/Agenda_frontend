@@ -1,0 +1,215 @@
+<div class="layout-main">
+
+  <div class="layout-content layout-top">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <div class="card card-box">
+          <div class="md-content" flex md-scroll-y>
+            <div>
+              <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
+                <div class="card">
+
+                  <span class="breadcrumb-desktop">
+                    <h1>GESTIÓN DE CITAS</h1>
+                  </span>
+
+                  <div class="search-box ui-inputgroup">
+                    <input type="text" pInputText size="30" placeholder="Buscar"
+                      (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                    <span class="ui-inputgroup-addon iconInput"><em class="pi pi-search"></em></span>
+                  </div>
+                  <p-toolbar>
+                    <div class="ui-toolbar-group-left">
+                      <h3 class="total-record">Total registros: {{citas.length}}</h3>
+                    </div>
+                    <div class="ui-toolbar-group-right">
+                      <i class="pi pi-plus-circle" title="Nuevo" (click)="addOrEdit(null)"></i>
+                    </div>
+                  </p-toolbar>
+                  <p-table #dt [columns]="cols" [value]="citas" [responsive]="configTables.responsive"
+                    [rows]="configTables.rowCount" [rowsPerPageOptions]="configTables.rowsPerPage"
+                    selectionMode="single">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns; let i = index" id="head-citas-{{i}}"
+                          [pSortableColumn]="col.field">
+                          {{col.header}}
+                          <p-sortIcon *ngIf="col.field !=='actions'" [field]="col.field">
+                          </p-sortIcon>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                      <tr [pSelectableRow]="rowData">
+                        <td *ngFor="let col of columns">
+                          <span *ngIf="col.field !== 'actions'">
+                            {{rowData[col.field]}}
+                          </span>
+                          <span *ngIf="col.field === 'actions'" style="text-align: center;     display: block;">
+                            <i class="pi pi-eye pi-actions" title="Ver" (click)="addOrEdit(rowData)"></i>
+                            <i class="pi pi-trash pi-actions" title="Elminar" (click)="delete(rowData)"></i>
+                          </span>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="columns.length">
+                          {{utilitiesString.msgEmptyTable}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
+  [closable]="false" [responsive]="true">
+  <p-header>
+    <h1>INFORMACIÓN DEL PROFESOR</h1>
+    <hr>
+  </p-header>
+  <div class="layout-content">
+    <div class="card">
+      <div class="card-content ui-fluid">
+        <div class="card card-w-title">
+
+          <div class="p-grid">
+            <div class="p-col-12">
+
+              <form [formGroup]="form">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_nombre" (input)="utilitiesString.convertOnlyText($event, form.get('cit_nombre'))"
+                        maxlength="60" type="text" pInputText formControlName="cit_nombre">
+                      <label>Nombre<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_descripcion"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_descripcion'))" maxlength="300"
+                        type="text" pInputText formControlName="cit_descripcion">
+                      <label>Descripcion<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_estado" (input)="utilitiesString.convertOnlyText($event, form.get('cit_estado'))"
+                        maxlength="300" type="text" pInputText formControlName="cit_estado">
+                      <label>Estado<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_fecha_agendada"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_fecha_agendada'))" maxlength="60"
+                        type="text" pInputText formControlName="cit_fecha_agendada">
+                      <label>Fecha Agendada<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_hora_inicio"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_hora_inicio'))" maxlength="300"
+                        type="text" pInputText formControlName="cit_hora_inicio">
+                      <label>Hora Inicio<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_hora_fin"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_hora_fin'))" maxlength="300"
+                        type="text" pInputText formControlName="cit_hora_fin">
+                      <label>Hora Fin<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_lugar" (input)="utilitiesString.convertOnlyText($event, form.get('cit_lugar'))"
+                        maxlength="60" type="text" pInputText formControlName="cit_lugar">
+                      <label>Lugar<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_profesores"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_profesores'))" maxlength="300"
+                        type="text" pInputText formControlName="cit_profesores">
+                      <label>Profesores<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_comentario"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_comentario'))" maxlength="300"
+                        type="text" pInputText formControlName="cit_comentario">
+                      <label>Comentario<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="cit_calificacion"
+                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_calificacion'))" maxlength="60"
+                        type="text" pInputText formControlName="cit_calificacion">
+                      <label>Calificación<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-action" style="text-align: center;">
+        <button pButton label="Guardar" style="background-color: #aa2e25; border: 1px solid #4d120d;"
+          [disabled]="!form.valid" (click)="save()" icon="pi pi-save"></button>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="icommon pi pi-arrow-left" (click)="display=false" (click)="limpiarFormulario()"
+      label="Volver"></button>
+  </p-footer>
+</p-dialog>
+
+<p-toast [style]="{marginTop: '70px'}"></p-toast>
+
+<p-confirmDialog class="confirmDialogModal" icon="fa fa-question-circle" #cd>
+  <p-footer>
+    <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
+      (click)="cd.accept()"></button>
+    <button class="btn-polaris" type="button" pButton icon="icon-cancel" style="text-align: center" label="No"
+      (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+<app-footer></app-footer>
+<div class="layout-mask"></div>

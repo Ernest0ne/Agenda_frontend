@@ -3,29 +3,26 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as SecureLS from 'secure-ls';
 import { AppComponent } from 'src/app/app.component';
-import { ProfesorModelAdapter } from 'src/app/demo/models/profesor';
-import { ProfesorService } from 'src/app/demo/Services/profesor.service';
+import { AgendaModelAdapter } from 'src/app/demo/models/agenda';
+import { AgendaService } from 'src/app/demo/Services/agenda.service';
 import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
 import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales';
-
 @Component({
-  selector: 'app-profesores',
-  templateUrl: './profesores.component.html',
-  styleUrls: ['./profesores.component.css'],
+  selector: 'app-agendas',
+  templateUrl: './agendas.component.html',
+  styleUrls: ['./agendas.component.css'],
   providers: [ConfirmationService, MessageService, ConfigTables]
 })
-export class ProfesoresComponent implements OnInit {
+export class AgendasComponent implements OnInit {
 
   display: boolean;
   form: FormGroup;
-  profesores = []
-  profesor: any
+  agendas = []
+  agenda: any
   cols = [];
   ls = new SecureLS({ encodingType: 'aes' });
   totalRegistros = 0;
-  departamentos = [];
-  facultades = [];
 
   constructor(
     public configTables: ConfigTables,
@@ -33,12 +30,10 @@ export class ProfesoresComponent implements OnInit {
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
     private utilitiesString: UtilitiesConfigString,
-    private profesorService: ProfesorService,
-    private adapter: ProfesorModelAdapter
+    private agendaService: AgendaService,
+    private adapter: AgendaModelAdapter
   ) {
     this.display = false;
-    this.departamentos = this.utilitiesString.departamentos;
-    this.facultades = this.utilitiesString.facultades;
   }
 
   ngOnInit() {
@@ -52,28 +47,24 @@ export class ProfesoresComponent implements OnInit {
 
   cargarFormulario() {
     this.form = new FormGroup({
-      pro_nombre: new FormControl({ value: null, disabled: false }, [Validators.required]),
-      pro_apellido: new FormControl({ value: null, disabled: false }, [Validators.required]),
-      pro_correo: new FormControl({ value: null, disabled: false }, [Validators.required]),
-      pro_facultad: new FormControl({ value: null, disabled: false }, [Validators.required]),
-      pro_departamento: new FormControl({ value: null, disabled: false }, [Validators.required]),
+      age_nombre: new FormControl({ value: null, disabled: false }, [Validators.required]),
+      age_descripcion: new FormControl({ value: null, disabled: false }, [Validators.required])
     });
   }
 
   cargarTabla() {
     this.cols = [
-      { field: 'pro_nombre', header: 'Nombre' },
-      { field: 'pro_apellido', header: 'Apellido' },
-      { field: 'pro_correo', header: 'Correo' },
+      { field: 'age_nombre', header: 'Nombre' },
+      { field: 'age_descripcion', header: 'Descripción' },
       { field: 'actions', header: 'Acciones' },
     ];
   }
 
 
   get() {
-    this.profesorService.listar().subscribe(res => {
+    this.agendaService.listar().subscribe(res => {
       if (res.status) {
-        this.profesores = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'pro_nombre');
+        this.agendas = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'age_nombre');
       }
     }, err => {
     });
@@ -81,9 +72,9 @@ export class ProfesoresComponent implements OnInit {
 
   delete(data) {
     this.confirmationService.confirm({
-      message: this.utilitiesString.msgConfirmDelete + 'el profesor ' + data.pro_nombre + '?',
+      message: this.utilitiesString.msgConfirmDelete + 'la agenda ' + data.age_nombre + '?',
       accept: () => {
-        this.profesorService.eliminar(data.pro_id).subscribe(resp => {
+        this.agendaService.eliminar(data.age_id).subscribe(resp => {
           if (resp.status) {
             this.funcionesGenerales.showSuccessViaToast(resp.message)
             this.get();
@@ -102,23 +93,20 @@ export class ProfesoresComponent implements OnInit {
 
   show(data) {
     this.display = true;
-    this.profesor = data;
+    this.agenda = data;
     this.setData(data);
   }
 
   setData(data) {
-    this.form.get('pro_nombre').setValue(data ? data.pro_nombre : null);
-    this.form.get('pro_apellido').setValue(data ? data.pro_apellido : null);
-    this.form.get('pro_correo').setValue(data ? data.pro_correo : null);
-    this.form.get('pro_facultad').setValue(data ? data.pro_facultad : null);
-    this.form.get('pro_departamento').setValue(data ? data.pro_departamento : null);
+    this.form.get('age_nombre').setValue(data ? data.age_nombre : null);
+    this.form.get('age_descripcion').setValue(data ? data.age_descripcion : null);
   }
 
   save() {
     let obj = this.form.value;
-    if (this.profesor) {
-      obj['pro_id'] = this.profesor.pro_id;
-      this.profesorService.actualizar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
+    if (this.agenda) {
+      obj['age_id'] = this.agenda.age_id;
+      this.agendaService.actualizar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
         if (resp.status) {
           this.funcionesGenerales.showSuccessViaToast(resp.message)
           this.get();
@@ -126,7 +114,7 @@ export class ProfesoresComponent implements OnInit {
         }
       });
     } else {
-      this.profesorService.registrar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
+      this.agendaService.registrar(this.adapter.adaptObjectSend(obj)).subscribe(resp => {
         if (resp.status) {
           this.funcionesGenerales.showSuccessViaToast(resp.message)
           this.get();
@@ -137,7 +125,7 @@ export class ProfesoresComponent implements OnInit {
   }
 
   limpiarFormulario() {
-    this.profesor = undefined;
+    this.agenda = undefined;
     this.form.reset()
   }
 

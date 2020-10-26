@@ -121,6 +121,8 @@ import { NominaComponent } from './demo/Components/Empleados/nomina/nomina.compo
 import { ProfesoresComponent } from './demo/Components/agenda_profesores/profesores/profesores.component';
 import { ConfigTables } from './demo/utilities/config-tables.service';
 import { ExcelService } from './demo/utilities/excel.service';
+import { AgendasComponent } from './demo/Components/agenda_agendas/agendas/agendas.component';
+import { CitasComponent } from './demo/Components/agenda_citas/citas/citas.component';
 
 const config: SocketIoConfig = { url: environment.urlSockect, options: { autoConnect: false } };
 
@@ -241,7 +243,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PriceTiqueteComponent,
         SaveMaterialesComponent,
         NominaComponent,
-        ProfesoresComponent
+        ProfesoresComponent,
+        AgendasComponent,
+        CitasComponent
     ],
     providers: [
         Title,
