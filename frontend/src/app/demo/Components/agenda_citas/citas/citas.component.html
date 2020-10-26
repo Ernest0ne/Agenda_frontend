@@ -14,9 +14,22 @@
                   </span>
 
                   <div class="search-box ui-inputgroup">
-                    <input type="text" pInputText size="30" placeholder="Buscar"
-                      (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                    <span class="ui-inputgroup-addon iconInput"><em class="pi pi-search"></em></span>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                      <input type="text" pInputText size="30" placeholder="Buscar"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                      <span class="ui-inputgroup-addon iconInput"><em class="pi pi-search"></em></span>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                      <span class="ui-float-label">
+                        <p-dropdown [options]="agendas" [autoDisplayFirst]="true" [(ngModel)]="agenda"
+                          optionLabel="age_nombre" dataKey="age_id" (onChange)="get()">
+                        </p-dropdown>
+                        <label>Agendas<span class="required-field">*</span></label>
+                      </span>
+                    </div>
+
                   </div>
                   <p-toolbar>
                     <div class="ui-toolbar-group-left">
@@ -116,32 +129,33 @@
                 </div>
 
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
+
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_fecha_agendada"
-                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_fecha_agendada'))" maxlength="60"
-                        type="text" pInputText formControlName="cit_fecha_agendada">
+                      <p-calendar appendTo="body" [locale]="utilitiesString.language"
+                        formControlName="cit_fecha_agendada" dateFormat="dd-mm-yy"></p-calendar>
                       <label>Fecha Agendada<span class="required-field">*</span></label>
                     </span>
                   </div>
 
+
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_hora_inicio"
-                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_hora_inicio'))" maxlength="300"
-                        type="text" pInputText formControlName="cit_hora_inicio">
+                      <p-calendar id="closingTime" formControlName="cit_hora_inicio" [timeOnly]="true"
+                        [hourFormat]="24"></p-calendar>
                       <label>Hora Inicio<span class="required-field">*</span></label>
                     </span>
                   </div>
 
+
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_hora_fin"
-                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_hora_fin'))" maxlength="300"
-                        type="text" pInputText formControlName="cit_hora_fin">
+                      <p-calendar id="closingTime" formControlName="cit_hora_fin" [timeOnly]="true" [hourFormat]="24">
+                      </p-calendar>
                       <label>Hora Fin<span class="required-field">*</span></label>
                     </span>
                   </div>
+
                 </div>
 
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
@@ -155,10 +169,10 @@
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_profesores"
-                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_profesores'))" maxlength="300"
-                        type="text" pInputText formControlName="cit_profesores">
-                      <label>Profesores<span class="required-field">*</span></label>
+                      <p-multiSelect maxSelectedLabels="2" selectedItemsLabel="{0} items seleccionados"
+                        [options]="profesores" formControlName="cit_profesores" defaultLabel="">
+                      </p-multiSelect>
+                      <label [ngClass]="{'not-null': profesores.value != null}">Profesores</label>
                     </span>
                   </div>
 

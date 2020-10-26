@@ -16,6 +16,13 @@ export class CitaService {
     return this.http.get(this.URL_API + 'Cita') as any;
   }
 
+  listarByAgenda(id) {
+    const httpOptions = {
+      headers: new HttpHeaders({ cit_age_id: '' + id })
+    };
+    return this.http.get(this.URL_API + 'Cita/getByAgenda', httpOptions) as any;
+  }
+
   registrar(body) {
     return this.http.post(this.URL_API + 'Cita', body) as any;
   }
@@ -26,7 +33,7 @@ export class CitaService {
 
   eliminar(id) {
     const httpOptions = {
-      headers: new HttpHeaders({ age_id: '' + id })
+      headers: new HttpHeaders({ cit_id: '' + id })
     };
     return this.http.delete(this.URL_API + 'Cita', httpOptions) as any;
   }
