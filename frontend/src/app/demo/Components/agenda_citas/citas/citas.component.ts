@@ -12,6 +12,7 @@ import { AgendaService } from 'src/app/demo/Services/agenda.service';
 import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
 import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales';
+
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
@@ -122,18 +123,23 @@ export class CitasComponent implements OnInit {
   setData(data) {
 
     let dateInicio = new Date();
-    dateInicio.setHours(data.cit_hora_inicio.split(":")[0]);
-    dateInicio.setMinutes(data.cit_hora_inicio.split(":")[1]);
-
     let dateFin = new Date();
-    dateFin.setHours(data.cit_hora_fin.split(":")[0]);
-    dateFin.setMinutes(data.cit_hora_fin.split(":")[1]);
+    let date = new Date();
+
+
+    if (data) {
+      date = new Date(data.cit_fecha_agendada);
+      dateInicio.setHours(data.cit_hora_inicio.split(":")[0]);
+      dateInicio.setMinutes(data.cit_hora_inicio.split(":")[1]);
+      dateFin.setHours(data.cit_hora_fin.split(":")[0]);
+      dateFin.setMinutes(data.cit_hora_fin.split(":")[1]);
+    }
 
 
     this.form.get('cit_nombre').setValue(data ? data.cit_nombre : null);
     this.form.get('cit_descripcion').setValue(data ? data.cit_descripcion : null);
     this.form.get('cit_estado').setValue(data ? data.cit_estado : null);
-    this.form.get('cit_fecha_agendada').setValue(data ? data.cit_fecha_agendada : null);
+    this.form.get('cit_fecha_agendada').setValue(data ? date : null);
     this.form.get('cit_comentario').setValue(data ? data.cit_comentario : null);
     this.form.get('cit_agenda').setValue(data ? data.cit_agenda : null);
     this.form.get('cit_profesores').setValue(data ? data.cit_profesores : null);
@@ -162,7 +168,7 @@ export class CitasComponent implements OnInit {
     let dia = date.getDay().toString.length < 2 ? "0" + date.getDay() : "" + date.getDay()
     let mes = date.getMonth().toString.length < 2 ? "0" + date.getMonth() : "" + date.getMonth()
 
-    obj.cit_fecha_agendada = dia + "-" + mes + "-" + date.getFullYear
+    obj.cit_fecha_agendada = dia + "-" + mes + "-" + date.getFullYear()
 
     obj.cit_hora_fin = horaFin.getHours() + ":" + horaFin.getMinutes()
     obj.cit_hora_inicio = horaInicio.getHours() + ":" + horaInicio.getMinutes()
@@ -197,8 +203,6 @@ export class CitasComponent implements OnInit {
     this.profesorService.listar().subscribe(res => {
       if (res.status) {
         this.profesores = this.utilitiesString.sortAscending(this.profesorAdapter.adaptList(res.data), 'pro_nombre');
-        console.log(this.profesores);
-
         this.profesores = this.profesores.map(c => {
           return {
             value: c.pro_id,

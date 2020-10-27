@@ -103,17 +103,15 @@
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_nombre" (input)="utilitiesString.convertOnlyText($event, form.get('cit_nombre'))"
-                        maxlength="60" type="text" pInputText formControlName="cit_nombre">
+                      <input id="cit_nombre" maxlength="60" type="text" pInputText formControlName="cit_nombre">
                       <label>Nombre<span class="required-field">*</span></label>
                     </span>
                   </div>
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_descripcion"
-                        (input)="utilitiesString.convertOnlyText($event, form.get('cit_descripcion'))" maxlength="300"
-                        type="text" pInputText formControlName="cit_descripcion">
+                      <input id="cit_descripcion" maxlength="300" type="text" pInputText
+                        formControlName="cit_descripcion">
                       <label>Descripcion<span class="required-field">*</span></label>
                     </span>
                   </div>
@@ -133,8 +131,8 @@
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
                       <p-calendar appendTo="body" [locale]="utilitiesString.language"
-                        formControlName="cit_fecha_agendada" dateFormat="dd-mm-yy"></p-calendar>
-                      <label>Fecha Agendada<span class="required-field">*</span></label>
+                        formControlName="cit_fecha_agendada" dateFormat="yy-mm-dd"></p-calendar>
+                      <label>Fecha de expiración<span class="required-field">*</span></label>
                     </span>
                   </div>
 
