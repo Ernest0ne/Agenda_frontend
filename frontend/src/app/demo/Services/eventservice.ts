@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class EventService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getEvents() {
         return this.http
@@ -11,5 +11,12 @@ export class EventService {
             .toPromise()
             .then(res => <any[]>res.data)
             .then(data => data);
+    }
+
+    getEventsCalendar() {
+        return this.http.get('showcase/resources/data/calendarevents.json')
+            .toPromise()
+            .then(res => <any[]>res)
+            .then(data => { return data; });
     }
 }

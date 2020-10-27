@@ -11,6 +11,8 @@ import { ConfigColor } from 'src/configColor';
 import { BreadcrumbService } from './breadcrumb.service';
 import { FuncionesGenerales } from './demo/Components/FuncionesGenerales/funcionesGenerales';
 import { async } from 'q';
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
     selector: 'app-root',
@@ -63,6 +65,8 @@ export class AppComponent implements OnDestroy {
         private deviceService: DeviceDetectorService, updates: SwUpdate, private titleService: Title, private configColor: ConfigColor,
         public breadcrumbService: BreadcrumbService, private funcionesGenerales: FuncionesGenerales) {
 
+        const name = Calendar.name;
+
         updates.available.subscribe(event => {
             updates.activateUpdate().then(() => document.location.reload());
         });
@@ -93,7 +97,7 @@ export class AppComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-     
+
     }
 
     connectSocket() {
@@ -950,41 +954,41 @@ export class AppComponent implements OnDestroy {
                     });
                     break;
                 case 'LABORATORIO_GARANTIA':
-                        this.breadcrumbItems.push({
-                            label: 'Gestión De Laboratorio / Control De Terminales',
-                        });
-                        this.breadcrumbItems.push({
-                            label: 'Garantía',
-                            routerLink: '/polarisCore/ControldeTerminales'
-                        });
-                        break;
-               case 'LABORATORIO_POSIBLE_DADO_BAJA':
-                        this.breadcrumbItems.push({
-                            label: 'Gestión De Laboratorio / Control De Terminales',
-                        });
-                        this.breadcrumbItems.push({
-                            label: 'Posible dado de baja',
-                            routerLink: '/polarisCore/ControldeTerminales'
-                        });
-                        break;
+                    this.breadcrumbItems.push({
+                        label: 'Gestión De Laboratorio / Control De Terminales',
+                    });
+                    this.breadcrumbItems.push({
+                        label: 'Garantía',
+                        routerLink: '/polarisCore/ControldeTerminales'
+                    });
+                    break;
+                case 'LABORATORIO_POSIBLE_DADO_BAJA':
+                    this.breadcrumbItems.push({
+                        label: 'Gestión De Laboratorio / Control De Terminales',
+                    });
+                    this.breadcrumbItems.push({
+                        label: 'Posible dado de baja',
+                        routerLink: '/polarisCore/ControldeTerminales'
+                    });
+                    break;
                 case 'LABORATORIO_ALERTA':
-                        this.breadcrumbItems.push({
-                            label: 'Gestión De Laboratorio / Control De Terminales',
-                        });
-                        this.breadcrumbItems.push({
-                            label: 'Alerta',
-                            routerLink: '/polarisCore/ControldeTerminales'
-                        });
-                        break;
+                    this.breadcrumbItems.push({
+                        label: 'Gestión De Laboratorio / Control De Terminales',
+                    });
+                    this.breadcrumbItems.push({
+                        label: 'Alerta',
+                        routerLink: '/polarisCore/ControldeTerminales'
+                    });
+                    break;
                 case 'LABORATORIO_QA':
-                        this.breadcrumbItems.push({
-                            label: 'Gestión De Laboratorio / Control De Terminales',
-                        });
-                        this.breadcrumbItems.push({
-                            label: 'QA',
-                            routerLink: '/polarisCore/ControldeTerminales'
-                        });
-                        break;
+                    this.breadcrumbItems.push({
+                        label: 'Gestión De Laboratorio / Control De Terminales',
+                    });
+                    this.breadcrumbItems.push({
+                        label: 'QA',
+                        routerLink: '/polarisCore/ControldeTerminales'
+                    });
+                    break;
                 case 'LABORATORIO_TIPIFICACION_FALLAS':
                     this.breadcrumbItems.push({
                         label: 'Gestión De Laboratorio',

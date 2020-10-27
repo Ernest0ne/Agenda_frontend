@@ -24,7 +24,6 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { FieldsetModule } from 'primeng/fieldset';
-import { FullCalendarModule } from 'primeng/fullcalendar';
 import { GalleriaModule } from 'primeng/galleria';
 import { GrowlModule } from 'primeng/growl';
 import { InplaceModule } from 'primeng/inplace';
@@ -123,6 +122,14 @@ import { ConfigTables } from './demo/utilities/config-tables.service';
 import { ExcelService } from './demo/utilities/excel.service';
 import { AgendasComponent } from './demo/Components/agenda_agendas/agendas/agendas.component';
 import { CitasComponent } from './demo/Components/agenda_citas/citas/citas.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+
+FullCalendarModule.registerPlugins([
+    dayGridPlugin,
+    interactionPlugin
+]);
 
 const config: SocketIoConfig = { url: environment.urlSockect, options: { autoConnect: false } };
 
@@ -278,4 +285,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -6,6 +6,15 @@ import { DasboardService } from '../Services/dasboard.service';
 import { Svg } from '../svgPath/svg';
 import { Message } from 'primeng/components/common/api';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { EventService } from '../Services/eventservice';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarOptions } from '@fullcalendar/angular';
+
+
+
+
 
 @Component({
   templateUrl: './emptydemo.component.html',
@@ -17,14 +26,21 @@ export class EmptyDemoComponent implements OnInit {
   widthScreen = 0;
   msgs: Message[] = [];
   dataConteiner: any;
+  events: any[];
+  options: any;
+
+  calendarOptions: CalendarOptions
+
+  handleDateClick(arg) {
+    alert('date click! ' + arg.dateStr)
+  }
 
   constructor(
     public svg: Svg,
     public funcionesGenerales: FuncionesGenerales,
     public dasboardService: DasboardService,
     private app: AppComponent,
-    private funciones: AppComponent,
-
+    private funciones: AppComponent
   ) {
   }
 
@@ -33,6 +49,15 @@ export class EmptyDemoComponent implements OnInit {
     this.app.setTitleMobile('INICIO');
     this.funciones.mostarMenu();
     this.dataConteiner = this.svg.returnMain();
+
+    this.calendarOptions = {
+      initialView: 'dayGridMonth',
+      events: [
+        { title: 'Comite curricular', date: '2020-10-25' },
+        { title: 'Cita de incio de semestre', date: '2020-10-27' }
+      ]
+    };
+
   }
 
 

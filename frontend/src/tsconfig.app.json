@@ -3,7 +3,8 @@
     "compilerOptions": {
         "outDir": "../out-tsc/app",
         "importHelpers": true,
-        "types": []
+        "types": [],
+        "skipLibCheck": true
     },
     "exclude": [
         "test.ts",

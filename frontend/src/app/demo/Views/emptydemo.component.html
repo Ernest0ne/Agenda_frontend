@@ -11,20 +11,8 @@
                         <app-breadcrumb></app-breadcrumb>
                     </span>
 
-                    <perfect-scrollbar [disabled]="funcionesGenerales.getDevice()" class="content-overflow">
-                        <div class="inicioPolaris" *ngIf="imagenFondo || (widthScreen >= 200 && widthScreen <= 896)">
-                            <div class="inicioPo">
-                                <div class="circles1">
-                                    <div class="circ2"></div>
-                                </div>
-                                <div class="circles1 reflection">
-                                    <div class="circ2"></div>
-                                </div>
-                                <div class="terminalPoss" [innerHTML]="dataConteiner">
-                                </div>
-                            </div>
-                        </div>
-
+                    <perfect-scrollbar class="content-overflow">
+                        <full-calendar [options]="calendarOptions"></full-calendar>
                     </perfect-scrollbar>
 
                 </div>
