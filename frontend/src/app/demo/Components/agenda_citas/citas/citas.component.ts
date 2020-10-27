@@ -12,12 +12,13 @@ import { AgendaService } from 'src/app/demo/Services/agenda.service';
 import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
 import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
   styleUrls: ['./citas.component.css'],
-  providers: [ConfirmationService, MessageService, ConfigTables]
+  providers: [ConfirmationService, MessageService, ConfigTables, DatePipe]
 })
 export class CitasComponent implements OnInit {
 
@@ -43,7 +44,8 @@ export class CitasComponent implements OnInit {
     private profesorService: ProfesorService,
     private profesorAdapter: ProfesorModelAdapter,
     private agendarService: AgendaService,
-    private agendaAdapter: AgendaModelAdapter
+    private agendaAdapter: AgendaModelAdapter,
+    private datePipe: DatePipe
   ) {
     this.display = false;
   }
@@ -128,7 +130,9 @@ export class CitasComponent implements OnInit {
 
 
     if (data) {
-      date = new Date(data.cit_fecha_agendada);
+      let hast = data.cit_fecha_agendada.split("-")
+      date = new Date(hast[2] + "-" + hast[1] + "-" + (parseInt(hast[0]) + 1));
+
       dateInicio.setHours(data.cit_hora_inicio.split(":")[0]);
       dateInicio.setMinutes(data.cit_hora_inicio.split(":")[1]);
       dateFin.setHours(data.cit_hora_fin.split(":")[0]);
@@ -156,23 +160,13 @@ export class CitasComponent implements OnInit {
       nombre: this.agenda.age_nombre
     }
 
-
-    console.log(obj);
-
-    let date = new Date(obj.cit_fecha_agendada)
     let horaInicio = new Date(obj.cit_hora_inicio)
     let horaFin = new Date(obj.cit_hora_fin)
 
-    console.log(obj);
+    obj.cit_fecha_agendada = this.datePipe.transform(obj.cit_fecha_agendada, 'dd-MM-yyyy')
 
-    let dia = date.getDay().toString.length < 2 ? "0" + date.getDay() : "" + date.getDay()
-    let mes = date.getMonth().toString.length < 2 ? "0" + date.getMonth() : "" + date.getMonth()
-
-    obj.cit_fecha_agendada = dia + "-" + mes + "-" + date.getFullYear()
-
-    obj.cit_hora_fin = horaFin.getHours() + ":" + horaFin.getMinutes()
-    obj.cit_hora_inicio = horaInicio.getHours() + ":" + horaInicio.getMinutes()
-
+    obj.cit_hora_fin = this.funcionesGenerales.obtenerHora(horaFin)
+    obj.cit_hora_inicio = this.funcionesGenerales.obtenerHora(horaInicio)
 
     if (this.cita) {
       obj['cit_id'] = this.cita.cit_id;

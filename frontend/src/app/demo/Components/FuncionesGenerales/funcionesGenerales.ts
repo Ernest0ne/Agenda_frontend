@@ -658,4 +658,12 @@ export class FuncionesGenerales {
         return text + ' Unidades'
     }
 
+
+    obtenerHora(fecha: Date) {
+        let horas = fecha.getHours().toString().length < 2 ? "0" + fecha.getHours().toString() : fecha.getHours().toString()
+        let minutos = fecha.getMinutes().toString().length < 2 ? "0" + fecha.getMinutes().toString() : fecha.getMinutes().toString()
+        return horas + ":" + minutos
+    }
+
+
 }
