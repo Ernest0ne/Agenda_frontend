@@ -5,7 +5,7 @@ import * as SecureLS from 'secure-ls';
 import { AppComponent } from 'src/app/app.component';
 import { UsuarioModelAdapter } from 'src/app/demo/models/usuario';
 import { UserService } from 'src/app/demo/Services/user.service';
-import { ConfigTablesUserService } from 'src/app/demo/utilities/config-tables.service';
+import { ConfigTables } from 'src/app/demo/utilities/config-tables.service';
 import { UtilitiesConfigString } from 'src/app/demo/utilities/utilities-config-string.service';
 import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales';
 
@@ -13,7 +13,7 @@ import { FuncionesGenerales } from '../../FuncionesGenerales/funcionesGenerales'
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, ConfigTables]
 })
 export class UsuarioComponent implements OnInit {
 

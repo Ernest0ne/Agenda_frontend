@@ -32,6 +32,7 @@ export class CitasComponent implements OnInit {
   cols = [];
   ls = new SecureLS({ encodingType: 'aes' });
   totalRegistros = 0;
+  estados = []
 
   constructor(
     public configTables: ConfigTables,
@@ -47,6 +48,7 @@ export class CitasComponent implements OnInit {
     private agendaAdapter: AgendaModelAdapter,
     private datePipe: DatePipe
   ) {
+    this.estados = this.utilitiesString.statusCitas;
     this.display = false;
   }
 
@@ -123,26 +125,22 @@ export class CitasComponent implements OnInit {
   }
 
   setData(data) {
-
     let dateInicio = new Date();
     let dateFin = new Date();
     let date = new Date();
 
-
     if (data) {
       let hast = data.cit_fecha_agendada.split("-")
       date = new Date(hast[2] + "-" + hast[1] + "-" + (parseInt(hast[0]) + 1));
-
       dateInicio.setHours(data.cit_hora_inicio.split(":")[0]);
       dateInicio.setMinutes(data.cit_hora_inicio.split(":")[1]);
       dateFin.setHours(data.cit_hora_fin.split(":")[0]);
       dateFin.setMinutes(data.cit_hora_fin.split(":")[1]);
     }
 
-
     this.form.get('cit_nombre').setValue(data ? data.cit_nombre : null);
     this.form.get('cit_descripcion').setValue(data ? data.cit_descripcion : null);
-    this.form.get('cit_estado').setValue(data ? data.cit_estado : null);
+    this.form.get('cit_estado').setValue(data ? data.cit_estado : 'AGENDADA');
     this.form.get('cit_fecha_agendada').setValue(data ? date : null);
     this.form.get('cit_comentario').setValue(data ? data.cit_comentario : null);
     this.form.get('cit_agenda').setValue(data ? data.cit_agenda : null);

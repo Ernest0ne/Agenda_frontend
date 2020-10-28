@@ -55,4 +55,8 @@ export class UserService {
         return this.http.post(this.URL_API + 'Usuario/UpdatePassword', body) as any;
     }
 
+    resetClave(body) {
+        return this.http.post(this.URL_API + 'Mail/resetClave', body) as any;
+    }
+
 }

@@ -35,14 +35,18 @@
                             </span>
                           </div>
 
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
                           <div class="ui-g-12 ui-md-12 ui-lg-12 ui-fluid">
                             <span class="ui-float-label">
-                              <input id="usu_correo" maxlength="60" type="text" pInputText formControlName="usu_correo">
+                              <input id="usu_correo" maxlength="60" type="text" pInputText formControlName="usu_correo"
+                                [readonly]="true">
                               <label>Correo<span class="required-field">*</span></label>
                             </span>
                           </div>
-
                         </div>
+
                       </form>
 
 
@@ -91,14 +95,14 @@
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="usu_clave" maxlength="60" type="text" pInputText formControlName="usu_clave">
+                      <input id="usu_clave" maxlength="60" type="password" pInputText formControlName="usu_clave">
                       <label>Clave actual<span class="required-field">*</span></label>
                     </span>
                   </div>
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="usu_clave_nueva" maxlength="60" type="text" pInputText
+                      <input id="usu_clave_nueva" maxlength="60" type="password" pInputText
                         formControlName="usu_clave_nueva">
                       <label>Nueva clave<span class="required-field">*</span></label>
                     </span>
@@ -106,9 +110,9 @@
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="usu_clave_nueva_confirmacion" maxlength="60" type="text" pInputText
+                      <input id="usu_clave_nueva_confirmacion" maxlength="60" type="password" pInputText
                         formControlName="usu_clave_nueva_confirmacion">
-                      <label>Nueva clave<span class="required-field">*</span></label>
+                      <label>Confirmar clave<span class="required-field">*</span></label>
                     </span>
                   </div>
 

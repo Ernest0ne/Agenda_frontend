@@ -112,6 +112,13 @@ export class UtilitiesConfigString {
         { label: 'DESACTUALIZADO', value: 'DESACTUALIZADO' }
     ];
 
+
+    public statusCitas = [
+        { label: 'AGENDADA', value: 'AGENDADA' },
+        { label: 'PERDIDA', value: 'PERDIDA' },
+        { label: 'REALIZADA', value: 'REALIZADA' }
+    ];
+
     public optionsChartBeginAtZero = {
         scales: {
             yAxes: [{

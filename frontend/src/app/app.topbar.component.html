@@ -11,10 +11,10 @@
     </div>
 </div>
 <div class="layout-topbar" [ngClass]="{'breadcrumb-active': app.showTitleOrBreadcrumb}">
-    <a class="layout-menu-button clickPrev"
+    <!--     <a class="layout-menu-button clickPrev"
         *ngIf="funcionesGenerales.existsBtnPrev() && funcionesGenerales.getDevice()">
         <em class="pi pi-arrow-left" (click)="clickPrev();"></em>
-    </a>
+    </a> -->
     <a class="layout-menu-button" (click)="app.onMenuButtonClick($event);showLogo();"
         [ngClass]="status ? 'active':'inactive'">
         <em class="pi pi-bars"></em>
@@ -63,7 +63,8 @@
             [ngClass]="{'active-topmenuitem':app.activeTopbarItem === profile}">
 
             <a href="#" (click)="app.onTopbarItemClick($event,profile)">
-                <img alt="babylon-layout" src="{{imagenUsuarioPerfil}}" />
+                <img alt="babylon-layout"
+                    src="https://lh3.googleusercontent.com/proxy/FseGJTigTcE93347HIIE2eN5gmRrb99xmjxe2GxoKzqlL8-rzkaKmWkkfqsOSRAAWYQUSkOxovC3emUfhpSB3udWbU1fvScPhJ8" />
                 <span class="topbar-item-name">{{cargo}}</span>
             </a>
 
@@ -83,50 +84,6 @@
         </li>
 
         <div class="mask" *ngIf="app.activeTopbarItem === notifications"></div>
-        <li class="btn-notifi" #notifications
-            [ngClass]="{'active-topmenuitem':app.activeTopbarItem === notifications , 'quit': app.activeTopbarItem != notifications}">
-            <a href="#" (click)="app.onTopbarItemClick($event,notifications)">
-                <em class="topbar-icon icon-bell"></em>
-                <span class="topbar-badge" *ngIf="noti_length != '0' && noti_length !=''"> {{noti_length}} </span>
-            </a>
-
-            <ul class="notification hide" id="notification" *ngIf="noti_length > 0">
-                <perfect-scrollbar class="content-notification" [disabled]="funcionesGenerales.getDevice()">
-                    <div class="box-notification" *ngFor=" let notificacion of notificaciones"
-                        id="{{notificacion.noti_id}}">
-                        <li role="menuitem">
-                            <a>
-                                <div class="box-header">
-                                    <em class="icon-logo-svg"></em>
-                                    <h3 class="tagFont">{{notificacion.noti_origin}}</h3>
-                                    <button (click)="verNotificacion(notificacion.noti_id)" class="buttonGo">X</button>
-                                </div>
-                                <div class="box-body">
-                                    <h3 class="tagFont">{{notificacion.noti_msg}}</h3>
-                                    <h3 class="tagFont" *ngIf="notificacion.noti_length == 1"
-                                        [innerHTML]="notificacion.noti_espe"></h3>
-                                    <h3 class="tagFont">Estado: {{notificacion.noti_state}}</h3>
-                                    <h3 class="tagFont">Tipo: {{notificacion.noti_type}}</h3>
-                                </div>
-                                <div *ngIf="notificacion.noti_show">
-                                    <h3 class="tagFont" [innerHTML]="notificacion.noti_espe"></h3>
-                                </div>
-                                <div class="box-footer">
-                                    <div>
-                                        <h4 class="tagFont">{{notificacion.noti_date_create}}</h4>
-                                        <em class="pi pi-calendar"></em>
-                                    </div>
-                                    <button *ngIf="notificacion.noti_data || notificacion.noti_length > 1"
-                                        icon="pi pi-chevron-down" pButton
-                                        (click)="mostrarModalUbicaciones(notificacion);"></button>
-                                </div>
-                            </a>
-                        </li>
-                    </div>
-                </perfect-scrollbar>
-            </ul>
-
-        </li>
     </ul>
 </div>
 

@@ -118,8 +118,9 @@
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_estado" (input)="utilitiesString.convertOnlyText($event, form.get('cit_estado'))"
-                        maxlength="300" type="text" pInputText formControlName="cit_estado">
+                      <p-dropdown [options]="estados" [autoDisplayFirst]="false" formControlName="cit_estado"
+                        [readonly]="cita == null">
+                      </p-dropdown>
                       <label>Estado<span class="required-field">*</span></label>
                     </span>
                   </div>
@@ -174,27 +175,26 @@
                     </span>
                   </div>
 
-                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid" *ngIf="form.get('cit_estado').value === 'REALIZADA'">
                     <span class="ui-float-label">
                       <input id="cit_comentario"
                         (input)="utilitiesString.convertOnlyText($event, form.get('cit_comentario'))" maxlength="300"
                         type="text" pInputText formControlName="cit_comentario">
-                      <label>Comentario<span class="required-field">*</span></label>
+                      <label>Comentario<span class="required-field"></span></label>
                     </span>
                   </div>
                 </div>
 
-                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="form.get('cit_estado').value === 'REALIZADA'">
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
                       <input id="cit_calificacion"
                         (input)="utilitiesString.convertOnlyText($event, form.get('cit_calificacion'))" maxlength="60"
                         type="text" pInputText formControlName="cit_calificacion">
-                      <label>Calificación<span class="required-field">*</span></label>
+                      <label>Calificación<span class="required-field"></span></label>
                     </span>
                   </div>
                 </div>
-
 
               </form>
             </div>

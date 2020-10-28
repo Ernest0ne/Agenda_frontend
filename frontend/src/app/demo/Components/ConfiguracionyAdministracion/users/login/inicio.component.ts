@@ -7,6 +7,7 @@ import { AppComponent } from '../../../../../app.component';
 import * as SecureLS from 'secure-ls';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginModelAdapter } from 'src/app/demo/models/login';
+import { FuncionesGenerales } from '../../../FuncionesGenerales/funcionesGenerales';
 
 
 
@@ -22,11 +23,13 @@ export class InicioComponent implements OnInit {
     restablecerContrasena = false;
     form: FormGroup;
     login: any
+    correo: any
 
     constructor(
         public userService: UserService,
         private funciones: AppComponent,
-        private adapter: LoginModelAdapter
+        private adapter: LoginModelAdapter,
+        public funcionesGenerales: FuncionesGenerales
     ) { }
 
     ngOnInit() {
@@ -39,9 +42,7 @@ export class InicioComponent implements OnInit {
     }
 
     loginUser() {
-
         this.login = this.form.value;
-
         this.userService.login(this.adapter.adaptObjectSend(this.login)).subscribe(resp => {
             if (resp.status) {
                 this.ls.set('token', resp.token);
@@ -49,8 +50,6 @@ export class InicioComponent implements OnInit {
                 location.href = '#/AgendApp/';
             }
         });
-
-
     }
 
 
@@ -71,6 +70,19 @@ export class InicioComponent implements OnInit {
 
     limpiarModal() {
         this.restablecerContrasena = false;
+    }
+
+    resetClave() {
+        let obj = {
+            usu_login: this.correo
+        }
+        this.userService.resetClave(obj).subscribe(resp => {
+            if (resp.status) {
+                this.funcionesGenerales.showSuccessViaToast(resp.message)
+                this.restablecerContrasena = false;
+            }
+        });
+
     }
 
 }

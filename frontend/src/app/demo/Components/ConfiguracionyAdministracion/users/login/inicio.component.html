@@ -66,40 +66,18 @@
     </p-header>
     <div class="card">
         <div class="p-grid">
-            <div class="p-col-12 flex">
-                <input type="text" autocomplete="off" maxlength="20" placeholder="Código de usuario"
-                    class="ui-inputtext ui-widget inputRestablecer" (keyup.enter)="consultarUsuario()"
-                    [(ngModel)]="codigoUsuario" (keyup)="mayuscula()">
-                <button type="button" (click)="consultarUsuario()"
-                    class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btnRestablecer">
-                    <span class="ui-button-text ui-c">Buscar</span>
-                </button>
-            </div>
-            <div class="p-col 12 result" *ngIf="divLabel">
-                <div class="campoInf">
-                    <em class="icon-user"></em>
-                    <div>
-                        <h3>Código usuario</h3>
-                        <h4>{{codigoMostrar}}</h4>
-                    </div>
-                </div>
-                <div class="campoInf">
-                    <em class="pi pi-envelope"></em>
-                    <div>
-                        <h3>Correo</h3>
-                        <h4>{{correoMostrar}}</h4>
-                    </div>
-                </div>
-                <div class="campoInf">
-                    <em class="pi"
-                        [ngClass]="{'pi-check':estadoMostrar === 'ACTIVO','pi-times':estadoMostrar === 'INACTIVO'}"></em>
-                    <div>
-                        <h3>Estado</h3>
-                        <h4>{{estadoMostrar}}</h4>
-                    </div>
-                </div>
-            </div>
+            <div class="p-col-12">
+                <p>Te enviaremos una nueva contraseña, por favor diligencia tu correo.</p>
 
+                <input type="text" autocomplete="off" maxlength="200" placeholder="Correo" class="inputRestablecer"
+                    (keyup.enter)="resetClave()" [(ngModel)]="correo" style="margin-top: 2%;">
+
+                <button type="button" (click)="resetClave()" [disabled]="correo == undefined"
+                    class="ui-state-default ui-corner-all ui-button-text-only btnRestablecer" style="margin-top: 2%;">
+                    <span class="ui-button-text ui-c">Enviar</span>
+                </button>
+
+            </div>
         </div>
     </div>
     <div class="p-col-12 centrarFlex" *ngIf="btnRestablecer">
