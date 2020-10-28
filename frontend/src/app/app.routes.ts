@@ -5,6 +5,7 @@ import { InicioComponent } from './demo/Components/ConfiguracionyAdministracion/
 import { ProfesoresComponent } from './demo/Components/agenda_profesores/profesores/profesores.component';
 import { AgendasComponent } from './demo/Components/agenda_agendas/agendas/agendas.component';
 import { CitasComponent } from './demo/Components/agenda_citas/citas/citas.component';
+import { NotasComponent } from './demo/Components/agenda_notas/notas/notas.component';
 
 
 
@@ -14,7 +15,8 @@ export const routes: Routes = [
     { path: 'AgendApp', component: EmptyDemoComponent },
     { path: 'AgendApp/Profesores', component: ProfesoresComponent },
     { path: 'AgendApp/Agendas', component: AgendasComponent },
-    { path: 'AgendApp/Citas', component: CitasComponent }
+    { path: 'AgendApp/Citas', component: CitasComponent },
+    { path: 'AgendApp/Notas', component: NotasComponent }
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {

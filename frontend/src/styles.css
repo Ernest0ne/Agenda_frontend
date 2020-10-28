@@ -9282,3 +9282,61 @@ body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight {
 .fc-view-harness{
     height: 550.19px !important;
 }
+
+body .fc th {
+    background-color: #ed4033;
+    border: 1px solid #ffffff;
+}
+
+a.fc-col-header-cell-cushion {
+    color: white;
+    font-family: sans-serif;
+}
+
+a.fc-col-header-cell-cushion:hover {
+    color: #6d1913;
+    font-family: sans-serif;
+}
+
+.fc-h-event {
+    background-color: #b7372e !important;
+    border: 1px solid #6d1913 !important;
+    display: block;
+}
+
+a.fc-daygrid-day-number {
+    color: black !important;
+}
+
+button.fc-prev-button.fc-button.fc-button-primary {
+    background-color: #ee4034 !important;
+    border-color: #6d1913 !important;
+}
+
+button.fc-next-button.fc-button.fc-button-primary {
+    background-color: #ee4034 !important;
+    border-color: #6d1913 !important;
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: #6d1913 !important;
+    border-color: #6d1913 !important;
+}
+
+.fc .fc-button-primary {
+    background-color: #6d1913!important;
+    border-color: #6d1913 !important;
+}
+
+.notas-card {
+    display: inline-block;
+    float: left;
+    margin-left: 3%;
+}
+
+.ui-card.ui-widget.ui-widget-content.ui-corner-all {
+    height: 150px;
+    max-height: 150px;
+    overflow: auto;
+    padding-bottom: 2%;
+}

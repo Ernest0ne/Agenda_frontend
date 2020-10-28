@@ -11,6 +11,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/angular';
+import { UtilitiesConfigString } from '../utilities/utilities-config-string.service';
 
 
 
@@ -40,7 +41,8 @@ export class EmptyDemoComponent implements OnInit {
     public funcionesGenerales: FuncionesGenerales,
     public dasboardService: DasboardService,
     private app: AppComponent,
-    private funciones: AppComponent
+    private funciones: AppComponent,
+    private utilitiesString: UtilitiesConfigString
   ) {
   }
 
@@ -52,12 +54,12 @@ export class EmptyDemoComponent implements OnInit {
 
     this.calendarOptions = {
       initialView: 'dayGridMonth',
+      locale: 'es',
       events: [
         { title: 'Comite curricular', date: '2020-10-25' },
         { title: 'Cita de incio de semestre', date: '2020-10-27' }
       ]
     };
-
   }
 
 
