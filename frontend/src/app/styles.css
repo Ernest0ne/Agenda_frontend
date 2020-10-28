@@ -9334,9 +9334,17 @@ button.fc-next-button.fc-button.fc-button-primary {
     margin-left: 3%;
 }
 
-.ui-card.ui-widget.ui-widget-content.ui-corner-all {
+.notas-card > p-card > .ui-card.ui-widget.ui-widget-content.ui-corner-all {
     height: 150px;
     max-height: 150px;
     overflow: auto;
     padding-bottom: 2%;
+}
+
+
+.usuario-card > p-card > .ui-card.ui-widget.ui-widget-content.ui-corner-all{
+    width: 50% !important;
+    margin-bottom: 2em;
+    margin-left: 25%;
+    height: 350px;
 }

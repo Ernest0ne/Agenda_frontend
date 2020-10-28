@@ -1,0 +1,145 @@
+<div class="layout-main">
+
+  <div class="layout-content layout-top">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <div class="card card-box">
+          <div class="md-content" flex md-scroll-y>
+            <div>
+              <perfect-scrollbar class="content-overflow" [disabled]="funcionesGenerales.getDevice()">
+                <div class="card">
+
+                  <span class="breadcrumb-desktop">
+                    <h1>INFORMACIÓN DEL USUARIO</h1>
+                  </span>
+
+                  <div class="usuario-card">
+                    <p-card header="Usuario" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                      <form [formGroup]="form">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                          <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
+                            <span class="ui-float-label">
+                              <input id="usu_nombre"
+                                (input)="utilitiesString.convertOnlyText($event, form.get('usu_nombre'))" maxlength="60"
+                                type="text" pInputText formControlName="usu_nombre">
+                              <label>Nombre<span class="required-field">*</span></label>
+                            </span>
+                          </div>
+
+                          <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
+                            <span class="ui-float-label">
+                              <input id="usu_apellido"
+                                (input)="utilitiesString.convertOnlyText($event, form.get('usu_apellido'))"
+                                maxlength="60" type="text" pInputText formControlName="usu_apellido">
+                              <label>Apellido<span class="required-field">*</span></label>
+                            </span>
+                          </div>
+
+                          <div class="ui-g-12 ui-md-12 ui-lg-12 ui-fluid">
+                            <span class="ui-float-label">
+                              <input id="usu_correo" maxlength="60" type="text" pInputText formControlName="usu_correo">
+                              <label>Correo<span class="required-field">*</span></label>
+                            </span>
+                          </div>
+
+                        </div>
+                      </form>
+
+
+                      <div class="card-action" style="text-align: center;">
+                        <button pButton label="Editar usuario"
+                          style="background-color: #aa2e25; border: 1px solid #4d120d; float: left; margin-top: 3%; margin-left: 5%;"
+                          [disabled]="!form.valid" (click)="save()" icon="pi pi-save"></button>
+                      </div>
+
+                      <div class="card-action" style="text-align: center;">
+                        <button pButton label="Cambiar clave"
+                          style="background-color: #aa2e25; border: 1px solid #4d120d; float: right; margin-top: 3%; margin-right: 5%;"
+                          (click)="updateClave()" icon="pi pi-key"></button>
+                      </div>
+
+
+                    </p-card>
+                  </div>
+
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog class="modal-content max" [(visible)]="display" [modal]="true" [style]="{'width':'auto'}" [blockScroll]="true"
+  [closable]="false" [responsive]="true">
+  <p-header>
+    <h1>ACTUALIZAR CONTRASEÑA</h1>
+    <hr>
+  </p-header>
+  <div class="layout-content">
+    <div class="card">
+      <div class="card-content ui-fluid">
+        <div class="card card-w-title">
+
+          <div class="p-grid">
+            <div class="p-col-12">
+
+              <form [formGroup]="formClave">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="usu_clave" maxlength="60" type="text" pInputText formControlName="usu_clave">
+                      <label>Clave actual<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="usu_clave_nueva" maxlength="60" type="text" pInputText
+                        formControlName="usu_clave_nueva">
+                      <label>Nueva clave<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <input id="usu_clave_nueva_confirmacion" maxlength="60" type="text" pInputText
+                        formControlName="usu_clave_nueva_confirmacion">
+                      <label>Nueva clave<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-action" style="text-align: center;">
+        <button pButton label="Guardar" style="background-color: #aa2e25; border: 1px solid #4d120d;"
+          [disabled]="!formClave.valid" (click)="saveClave()" icon="pi pi-save"></button>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="icommon pi pi-arrow-left" (click)="display=false" (click)="limpiarFormulario()"
+      label="Volver"></button>
+  </p-footer>
+</p-dialog>
+
+<p-toast [style]="{marginTop: '70px'}"></p-toast>
+
+<p-confirmDialog class="confirmDialogModal" icon="fa fa-question-circle" #cd>
+  <p-footer>
+    <button class="btn-polaris" type="button" pButton icon="icon-checked" style="text-align: center" label="Sí"
+      (click)="cd.accept()"></button>
+    <button class="btn-polaris" type="button" pButton icon="icon-cancel" style="text-align: center" label="No"
+      (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+<app-footer></app-footer>
+<div class="layout-mask"></div>

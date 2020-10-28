@@ -11,7 +11,8 @@
     </div>
 </div>
 <div class="layout-topbar" [ngClass]="{'breadcrumb-active': app.showTitleOrBreadcrumb}">
-    <a class="layout-menu-button clickPrev" *ngIf="funcionesGenerales.existsBtnPrev() && funcionesGenerales.getDevice()">
+    <a class="layout-menu-button clickPrev"
+        *ngIf="funcionesGenerales.existsBtnPrev() && funcionesGenerales.getDevice()">
         <em class="pi pi-arrow-left" (click)="clickPrev();"></em>
     </a>
     <a class="layout-menu-button" (click)="app.onMenuButtonClick($event);showLogo();"
@@ -30,7 +31,8 @@
         </a>
     </a>
 
-    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)"  [ngClass]="{'active-notification':app.activeTopbarItem === notifications}">
+    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)"
+        [ngClass]="{'active-notification':app.activeTopbarItem === notifications}">
         <em class="pi pi-ellipsis-v"></em>
     </a>
 
@@ -43,15 +45,9 @@
             <ul class="fadeInDown">
 
                 <li role="menuitem">
-                    <a href="/#/polarisCore/user/updatePassword" [attr.tabindex]="!active ? '-1' : null">
+                    <a href="/#/AgendApp/Usuario" [attr.tabindex]="!active ? '-1' : null">
                         <em class="pi pi-cog"></em>
-                        <span>Actualizar contraseña</span>
-                    </a>
-                </li>
-                <li role="menuitem" *ngIf="configuraciones">
-                    <a href="/#/polarisCore/Configuraciones" [attr.tabindex]="!active ? '-1' : null">
-                        <em class="pi pi-cog"></em>
-                        <span>Configuraciones</span>
+                        <span>Información del usuario</span>
                     </a>
                 </li>
                 <li role="menuitem">

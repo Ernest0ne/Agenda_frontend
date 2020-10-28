@@ -125,7 +125,8 @@ import { CitasComponent } from './demo/Components/agenda_citas/citas/citas.compo
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction';
-import { NotasComponent } from './demo/Components/agenda_notas/notas/notas.component'; // a plugin
+import { NotasComponent } from './demo/Components/agenda_notas/notas/notas.component';
+import { UsuarioComponent } from './demo/Components/agenda_usuario/usuario/usuario.component'; // a plugin
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -254,7 +255,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ProfesoresComponent,
         AgendasComponent,
         CitasComponent,
-        NotasComponent
+        NotasComponent,
+        UsuarioComponent
     ],
     providers: [
         Title,
