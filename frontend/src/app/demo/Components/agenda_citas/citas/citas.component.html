@@ -108,23 +108,12 @@
                     </span>
                   </div>
 
-                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                  <div class="ui-g-12 ui-md-8 ui-lg-8 ui-fluid">
                     <span class="ui-float-label">
-                      <input id="cit_descripcion" maxlength="300" type="text" pInputText
-                        formControlName="cit_descripcion">
+                      <textarea [rows]="3" [cols]="30" formControlName="cit_descripcion" pInputTextarea></textarea>
                       <label>Descripcion<span class="required-field">*</span></label>
                     </span>
                   </div>
-
-                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
-                    <span class="ui-float-label">
-                      <p-dropdown [options]="estados" [autoDisplayFirst]="false" formControlName="cit_estado"
-                        [readonly]="cita == null">
-                      </p-dropdown>
-                      <label>Estado<span class="required-field">*</span></label>
-                    </span>
-                  </div>
-
                 </div>
 
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
@@ -133,10 +122,9 @@
                     <span class="ui-float-label">
                       <p-calendar appendTo="body" [locale]="utilitiesString.language"
                         formControlName="cit_fecha_agendada" dateFormat="dd-mm-yy"></p-calendar>
-                      <label>Fecha de expiración<span class="required-field">*</span></label>
+                      <label>Fecha agendada<span class="required-field">*</span></label>
                     </span>
                   </div>
-
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
@@ -145,7 +133,6 @@
                       <label>Hora Inicio<span class="required-field">*</span></label>
                     </span>
                   </div>
-
 
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
@@ -175,7 +162,20 @@
                     </span>
                   </div>
 
-                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid" *ngIf="form.get('cit_estado').value === 'REALIZADA'">
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+                    <span class="ui-float-label">
+                      <p-dropdown [options]="estados" [autoDisplayFirst]="false" formControlName="cit_estado"
+                        [readonly]="cita == null">
+                      </p-dropdown>
+                      <label>Estado<span class="required-field">*</span></label>
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="form.get('cit_estado').value === 'REALIZADA'">
+
+                  <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
                       <input id="cit_comentario"
                         (input)="utilitiesString.convertOnlyText($event, form.get('cit_comentario'))" maxlength="300"
@@ -183,9 +183,7 @@
                       <label>Comentario<span class="required-field"></span></label>
                     </span>
                   </div>
-                </div>
 
-                <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="form.get('cit_estado').value === 'REALIZADA'">
                   <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                     <span class="ui-float-label">
                       <input id="cit_calificacion"

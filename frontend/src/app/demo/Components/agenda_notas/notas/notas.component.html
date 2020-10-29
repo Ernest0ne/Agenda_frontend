@@ -24,9 +24,11 @@
 
                   <div *ngFor="let nota of notas; let i = index" class="notas-card">
                     <p-card header={{nota.not_nombre}} [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                      <a style="float: right; width: 100%; text-align: end; color: #801f18;">
+                        {{nota.not_fecha_creacion}}</a>
                       <p>{{nota.not_descripcion}}</p>
                       <i class="pi pi-times-circle" title="Elminar" (click)="delete(nota)" style="float: right;
-                      font-size: 35px; color: #ee4034; cursor: pointer;"></i>
+                      font-size: 35px; color: #801f18; cursor: pointer;"></i>
                     </p-card>
                   </div>
 

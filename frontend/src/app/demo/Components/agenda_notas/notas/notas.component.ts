@@ -45,7 +45,6 @@ export class NotasComponent implements OnInit {
 
   }
 
-
   cargarFormulario() {
     this.form = new FormGroup({
       not_nombre: new FormControl({ value: null, disabled: false }, [Validators.required]),
@@ -61,11 +60,10 @@ export class NotasComponent implements OnInit {
     ];
   }
 
-
   get() {
     this.notaService.listar().subscribe(res => {
       if (res.status) {
-        this.notas = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'not_nombre');
+        this.notas = this.utilitiesString.sortDescending(this.adapter.adaptList(res.data), 'not_fecha_creacion');
       }
     }, err => {
     });

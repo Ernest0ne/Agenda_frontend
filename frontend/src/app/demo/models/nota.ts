@@ -9,7 +9,8 @@ export class NotaModel {
     constructor(
         public not_id: string,
         public not_nombre: string,
-        public not_descripcion: string
+        public not_descripcion: string,
+        public not_fecha_creacion: string
     ) { }
 }
 
@@ -28,7 +29,8 @@ export class NotaModelAdapter implements Adapter<NotaModel> {
                 array.push(new NotaModel(
                     item.not_id,
                     item.not_nombre,
-                    item.not_descripcion
+                    item.not_descripcion,
+                    item.not_fecha_creacion
                 ));
             });
         }
@@ -39,7 +41,8 @@ export class NotaModelAdapter implements Adapter<NotaModel> {
         return new NotaModel(
             item.not_id,
             item.not_nombre,
-            item.not_descripcion
+            item.not_descripcion,
+            item.not_fecha_creacion
         );
     }
 
@@ -47,7 +50,8 @@ export class NotaModelAdapter implements Adapter<NotaModel> {
         let obj = {
             not_id: item.not_id,
             not_nombre: item.not_nombre,
-            not_descripcion: item.not_descripcion
+            not_descripcion: item.not_descripcion,
+            not_fecha_creacion: item.not_fecha_creacion
         };
         return obj
     }
@@ -58,7 +62,8 @@ export class NotaModelAdapter implements Adapter<NotaModel> {
             array.push({
                 not_id: item.not_id,
                 not_nombre: item.not_nombre,
-                not_descripcion: item.not_descripcion
+                not_descripcion: item.not_descripcion,
+                not_fecha_creacion: item.not_fecha_creacion
             });
         });
         return array;

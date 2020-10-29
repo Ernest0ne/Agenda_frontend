@@ -12,6 +12,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { UtilitiesConfigString } from '../utilities/utilities-config-string.service';
+import { CitaService } from '../Services/cita.service';
+import { CitaModelAdapter } from '../models/cita';
 
 
 
@@ -29,7 +31,7 @@ export class EmptyDemoComponent implements OnInit {
   dataConteiner: any;
   events: any[];
   options: any;
-
+  citas = [];
   calendarOptions: CalendarOptions
 
   handleDateClick(arg) {
@@ -42,7 +44,9 @@ export class EmptyDemoComponent implements OnInit {
     public dasboardService: DasboardService,
     private app: AppComponent,
     private funciones: AppComponent,
-    private utilitiesString: UtilitiesConfigString
+    private utilitiesString: UtilitiesConfigString,
+    private citaService: CitaService,
+    private adapter: CitaModelAdapter,
   ) {
   }
 
@@ -52,16 +56,28 @@ export class EmptyDemoComponent implements OnInit {
     this.funciones.mostarMenu();
     this.dataConteiner = this.svg.returnMain();
 
-    this.calendarOptions = {
-      initialView: 'dayGridMonth',
-      locale: 'es',
-      events: [
-        { title: 'Comite curricular', date: '2020-10-25' },
-        { title: 'Cita de incio de semestre', date: '2020-10-27' }
-      ]
-    };
+    this.getByEstado();
   }
 
 
+  getByEstado() {
+    this.citaService.buscarByEstado('AGENDADA').subscribe(res => {
+      if (res.status) {
+        this.citas = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'cit_nombre');
+        this.events = this.citas.map(c => {
+          return {
+            title: c.cit_nombre,
+            date: c.cit_fecha_agendada.split('-')[2] + "-" + c.cit_fecha_agendada.split('-')[1] + "-" + c.cit_fecha_agendada.split('-')[0]
+          };
+        });
+        this.calendarOptions = {
+          initialView: 'dayGridMonth',
+          locale: 'es',
+          events: this.events
+        };
+      }
+    }, err => {
+    });
+  }
 
 }
