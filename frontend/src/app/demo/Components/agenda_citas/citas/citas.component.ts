@@ -33,6 +33,9 @@ export class CitasComponent implements OnInit {
   ls = new SecureLS({ encodingType: 'aes' });
   totalRegistros = 0;
   estados = []
+  estado: any
+  fechaInicio: any
+  fechaFin: any
 
   constructor(
     public configTables: ConfigTables,
@@ -217,5 +220,31 @@ export class CitasComponent implements OnInit {
     }, err => {
     });
   }
+
+  exportExcel() {
+    let columns = [
+      { field: 'cit_nombre', header: 'Nombre', class: '' },
+      { field: 'cit_descripcion', header: 'Descripcion', class: '' },
+      { field: 'cit_estado', header: 'Estado', class: '' },
+      { field: 'cit_fecha_agendada', header: 'Fecha de Agendada', class: '' },
+      { field: 'cit_hora_inicio', header: 'Hora Inicio', class: '' },
+      { field: 'cit_hora_fin', header: 'Hora Fin', class: '' },
+      { field: 'cit_agenda', header: 'Agenda', class: '' },
+      { field: 'cit_profesores', header: 'Profesores', class: '' },
+      { field: 'cit_lugar', header: 'Lugar', class: '' },
+      { field: 'cit_comentario', header: 'Comentario', class: '' },
+      { field: 'cit_calificacion', header: 'Calificacion', class: '' }
+    ];
+
+    setTimeout(() => {
+      this.configTables.exportToExcel(
+        undefined,
+        'Reporte de citas',
+        columns,
+        this.citas
+      );
+    }, 10);
+  }
+
 
 }
