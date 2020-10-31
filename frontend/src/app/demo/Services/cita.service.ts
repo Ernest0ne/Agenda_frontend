@@ -51,4 +51,12 @@ export class CitaService {
     };
     return this.http.get(this.URL_API + 'Cita/getByEstado', httpOptions) as any;
   }
+
+  filter(header) {
+    const httpOptions = {
+      headers: new HttpHeaders(header)
+    };
+    return this.http.get(this.URL_API + 'Cita/Filter', httpOptions) as any;
+  }
+
 }

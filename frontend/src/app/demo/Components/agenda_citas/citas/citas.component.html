@@ -30,8 +30,8 @@
 
                         <div class="ui-g-12 ui-md-3 ui-lg-3 ui-fluid">
                           <span class="ui-float-label">
-                            <p-dropdown [options]="estados" [autoDisplayFirst]="false" [(ngModel)]="estado"
-                              (onChange)="get()">
+                            <p-dropdown [options]="estadosFiltro" [autoDisplayFirst]="false" [(ngModel)]="estado"
+                              (onChange)="filter()">
                             </p-dropdown>
                             <label>Estados<span class="required-field"></span></label>
                           </span>
@@ -40,7 +40,7 @@
                         <div class="ui-g-12 ui-md-3 ui-lg-3 ui-fluid">
                           <span class="ui-float-label">
                             <p-calendar appendTo="body" [locale]="utilitiesString.language" [(ngModel)]="fechaInicio"
-                              dateFormat="dd-mm-yy" (onChange)="get()"></p-calendar>
+                              dateFormat="dd-mm-yy" (onSelect)="filter()"></p-calendar>
                             <label>Fecha Inicio<span class="required-field"></span></label>
                           </span>
                         </div>
@@ -48,7 +48,7 @@
                         <div class="ui-g-12 ui-md-3 ui-lg-3 ui-fluid">
                           <span class="ui-float-label">
                             <p-calendar appendTo="body" [locale]="utilitiesString.language" [(ngModel)]="fechaFin"
-                              dateFormat="dd-mm-yy" (onChange)="get()"></p-calendar>
+                              dateFormat="dd-mm-yy" (onSelect)="filter()"></p-calendar>
                             <label>Fecha Fin<span class="required-field"></span></label>
                           </span>
                         </div>

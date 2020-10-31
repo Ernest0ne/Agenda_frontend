@@ -37,7 +37,6 @@ export class ProfesoresComponent implements OnInit {
     private adapter: ProfesorModelAdapter
   ) {
     this.display = false;
-    this.departamentos = this.utilitiesString.departamentos;
     this.facultades = this.utilitiesString.facultades;
   }
 
@@ -139,6 +138,10 @@ export class ProfesoresComponent implements OnInit {
   limpiarFormulario() {
     this.profesor = undefined;
     this.form.reset()
+  }
+
+  getDepartamento() {
+    this.departamentos = this.utilitiesString.departamentos.filter(c => c.facultad === this.form.get('pro_facultad').value)
   }
 
 }

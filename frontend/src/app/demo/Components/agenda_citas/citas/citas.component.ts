@@ -36,6 +36,7 @@ export class CitasComponent implements OnInit {
   estado: any
   fechaInicio: any
   fechaFin: any
+  estadosFiltro = []
 
   constructor(
     public configTables: ConfigTables,
@@ -53,6 +54,8 @@ export class CitasComponent implements OnInit {
   ) {
     this.estados = this.utilitiesString.statusCitas;
     this.display = false;
+    this.estadosFiltro = Object.create(this.estados);
+    this.estadosFiltro.push({ label: 'TODOS', value: null })
   }
 
   ngOnInit() {
@@ -95,6 +98,26 @@ export class CitasComponent implements OnInit {
     this.citaService.listarByAgenda(this.agenda.age_id).subscribe(res => {
       if (res.status) {
         this.citas = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'cit_nombre');
+        this.estado = undefined;
+        this.fechaInicio = undefined;
+        this.fechaFin = undefined;
+      }
+    }, err => {
+    });
+  }
+
+
+  filter() {
+    let obj = {
+      cit_agenda: this.agenda.age_id,
+    }
+    if (this.fechaInicio) obj['cit_fecha_agendada_inicio'] = this.datePipe.transform(this.fechaInicio, 'dd-MM-yyyy');
+    if (this.fechaFin) obj['cit_fecha_agendada_fin'] = this.datePipe.transform(this.fechaFin, 'dd-MM-yyyy');
+    if (this.estado) obj['cit_estado'] = this.estado;
+
+    this.citaService.filter(obj).subscribe(res => {
+      if (res.status) {
+        this.citas = this.utilitiesString.sortAscending(this.adapter.adaptList(res.data), 'cit_nombre');
       }
     }, err => {
     });
@@ -134,7 +157,9 @@ export class CitasComponent implements OnInit {
 
     if (data) {
       let hast = data.cit_fecha_agendada.split("-")
-      date = new Date(hast[2] + "-" + hast[1] + "-" + (parseInt(hast[0]) + 1));
+      date = new Date(hast[2] + "-" + hast[1] + "-" + hast[0]);
+      date.setDate(date.getDate() + 1);
+
       dateInicio.setHours(data.cit_hora_inicio.split(":")[0]);
       dateInicio.setMinutes(data.cit_hora_inicio.split(":")[1]);
       dateFin.setHours(data.cit_hora_fin.split(":")[0]);
@@ -222,6 +247,21 @@ export class CitasComponent implements OnInit {
   }
 
   exportExcel() {
+    let citas = this.citas.map(c => {
+      return {
+        cit_nombre: c.cit_nombre,
+        cit_descripcion: c.cit_descripcion,
+        cit_estado: c.cit_estado,
+        cit_fecha_agendada: c.cit_fecha_agendada,
+        cit_hora_inicio: c.cit_hora_inicio,
+        cit_hora_fin: c.cit_hora_fin,
+        cit_agenda: c.cit_agenda.nombre,
+        cit_lugar: c.cit_lugar,
+        cit_comentario: c.cit_comentario,
+        cit_calificacion: c.cit_calificacion
+      };
+    });
+
     let columns = [
       { field: 'cit_nombre', header: 'Nombre', class: '' },
       { field: 'cit_descripcion', header: 'Descripcion', class: '' },
@@ -230,7 +270,6 @@ export class CitasComponent implements OnInit {
       { field: 'cit_hora_inicio', header: 'Hora Inicio', class: '' },
       { field: 'cit_hora_fin', header: 'Hora Fin', class: '' },
       { field: 'cit_agenda', header: 'Agenda', class: '' },
-      { field: 'cit_profesores', header: 'Profesores', class: '' },
       { field: 'cit_lugar', header: 'Lugar', class: '' },
       { field: 'cit_comentario', header: 'Comentario', class: '' },
       { field: 'cit_calificacion', header: 'Calificacion', class: '' }
@@ -241,7 +280,7 @@ export class CitasComponent implements OnInit {
         undefined,
         'Reporte de citas',
         columns,
-        this.citas
+        citas
       );
     }, 10);
   }

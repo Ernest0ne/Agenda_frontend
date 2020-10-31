@@ -125,17 +125,18 @@
 
                                     <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                                         <span class="ui-float-label">
-                                            <p-dropdown [options]="departamentos" [autoDisplayFirst]="false"
-                                                formControlName="pro_departamento"></p-dropdown>
-                                            <label>Departamento<span class="required-field">*</span></label>
+                                            <p-dropdown [options]="facultades" [autoDisplayFirst]="false"
+                                                formControlName="pro_facultad" (onChange)="getDepartamento()">
+                                            </p-dropdown>
+                                            <label>Facultad<span class="required-field">*</span></label>
                                         </span>
                                     </div>
 
                                     <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
                                         <span class="ui-float-label">
-                                            <p-dropdown [options]="facultades" [autoDisplayFirst]="false"
-                                                formControlName="pro_facultad"></p-dropdown>
-                                            <label>Facultad<span class="required-field">*</span></label>
+                                            <p-dropdown [options]="departamentos" [autoDisplayFirst]="false"
+                                                formControlName="pro_departamento"></p-dropdown>
+                                            <label>Departamento<span class="required-field">*</span></label>
                                         </span>
                                     </div>
 

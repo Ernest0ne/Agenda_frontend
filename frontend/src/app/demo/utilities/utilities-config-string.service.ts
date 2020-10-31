@@ -102,14 +102,37 @@ export class UtilitiesConfigString {
     ];
 
     public departamentos = [
-        { label: 'ACTUALIZADO', value: 'ACTUALIZADO' },
-        { label: 'DESACTUALIZADO', value: 'DESACTUALIZADO' }
+        { label: 'INGENIERÍA AGROINDUSTRIAL', value: 'INGENIERÍA AGROINDUSTRIAL', facultad: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'INGENIERÍA AGRONÓMICA', value: 'INGENIERÍA AGRONÓMICA', facultad: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'INGENIERÍA AMBIENTAL', value: 'INGENIERÍA AMBIENTAL', facultad: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'INGENIERÍA BIOTECNOLÓGICA', value: 'INGENIERÍA BIOTECNOLÓGICA', facultad: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'ZOOTECNIA', value: 'ZOOTECNIA', facultad: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'QUÍMICA INDUSTRIAL', value: 'QUÍMICA INDUSTRIAL', facultad: 'CIENCIAS BÁSICAS' },
+        { label: 'ADMINISTRACIÓN DE EMPRESAS', value: 'ADMINISTRACIÓN DE EMPRESAS', facultad: 'CIENCIAS EMPRESARIALES' },
+        { label: 'CONTADURÍA PÚBLICA', value: 'CONTADURÍA PÚBLICA', facultad: 'CIENCIAS EMPRESARIALES' },
+        { label: 'COMERCIO INTERNACIONAL', value: 'COMERCIO INTERNACIONAL', facultad: 'CIENCIAS EMPRESARIALES' },
+        { label: 'ENFERMERÍA', value: 'ENFERMERÍA', facultad: 'CIENCIAS DE LA SALUD' },
+        { label: 'SEGURIDAD Y SALUD EN EL TRABAJO', value: 'SEGURIDAD Y SALUD EN EL TRABAJO', facultad: 'CIENCIAS DE LA SALUD' },
+        { label: 'TECNOLOGÍA DE REGENCIA EN FARMACIA', value: 'TECNOLOGÍA DE REGENCIA EN FARMACIA', facultad: 'CIENCIAS DE LA SALUD' },
+        { label: 'INGENIERÍA CIVIL', value: 'INGENIERÍA CIVIL', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA DE SISTEMAS', value: 'INGENIERÍA DE SISTEMAS', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA ELECTRÓNICA', value: 'INGENIERÍA ELECTRÓNICA', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA ELECTROMECÁNICA', value: 'INGENIERÍA ELECTROMECÁNICA', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA INDUSTRIAL', value: 'INGENIERÍA INDUSTRIAL', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA DE MINAS', value: 'INGENIERÍA DE MINAS', facultad: 'INGENIERÍA' },
+        { label: 'INGENIERÍA MECÁNICA', value: 'INGENIERÍA MECÁNICA', facultad: 'INGENIERÍA' },
+        { label: 'TECNOLOGÍA EN CONSTRUCCIONES CIVILES', value: 'TECNOLOGÍA EN CONSTRUCCIONES CIVILES', facultad: 'INGENIERÍA' },
+        { label: 'TECNOLOGÍA EN OBRAS CIVILES', value: 'TECNOLOGÍA EN OBRAS CIVILES', facultad: 'INGENIERÍA' },
+        { label: 'TECNOLOGÍA EN PROCESOS INDUSTRIALES', value: 'TECNOLOGÍA EN PROCESOS INDUSTRIALES', facultad: 'INGENIERÍA' }
     ];
 
 
     public facultades = [
-        { label: 'ACTUALIZADO', value: 'ACTUALIZADO' },
-        { label: 'DESACTUALIZADO', value: 'DESACTUALIZADO' }
+        { label: 'CIENCIAS AGRARIAS Y DEL AMBIENTE', value: 'CIENCIAS AGRARIAS Y DEL AMBIENTE' },
+        { label: 'CIENCIAS BÁSICAS', value: 'CIENCIAS BÁSICAS' },
+        { label: 'CIENCIAS EMPRESARIALES', value: 'CIENCIAS EMPRESARIALES' },
+        { label: 'CIENCIAS DE LA SALUD', value: 'CIENCIAS DE LA SALUD' },
+        { label: 'INGENIERÍA', value: 'INGENIERÍA' }
     ];
 
 
