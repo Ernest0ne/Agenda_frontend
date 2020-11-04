@@ -32,7 +32,7 @@ export class ProfesoresComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString,
+    public utilitiesString: UtilitiesConfigString,
     private profesorService: ProfesorService,
     private adapter: ProfesorModelAdapter
   ) {

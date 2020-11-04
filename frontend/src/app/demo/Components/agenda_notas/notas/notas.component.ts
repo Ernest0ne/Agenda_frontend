@@ -30,7 +30,7 @@ export class NotasComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString,
+    public utilitiesString: UtilitiesConfigString,
     private notaService: NotaService,
     private adapter: NotaModelAdapter
   ) {

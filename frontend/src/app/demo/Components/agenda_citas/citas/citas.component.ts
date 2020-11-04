@@ -43,7 +43,7 @@ export class CitasComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString,
+    public utilitiesString: UtilitiesConfigString,
     private citaService: CitaService,
     private adapter: CitaModelAdapter,
     private profesorService: ProfesorService,
