@@ -31,8 +31,7 @@
         </a>
     </a>
 
-    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)"
-        [ngClass]="{'active-notification':app.activeTopbarItem === notifications}">
+    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
         <em class="pi pi-ellipsis-v"></em>
     </a>
 
@@ -83,7 +82,6 @@
             </ul>
         </li>
 
-        <div class="mask" *ngIf="app.activeTopbarItem === notifications"></div>
     </ul>
 </div>
 

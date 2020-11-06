@@ -29,7 +29,7 @@ export class AgendasComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString,
+    public utilitiesString: UtilitiesConfigString,
     private agendaService: AgendaService,
     private adapter: AgendaModelAdapter
   ) {

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  url: 'http://54.242.102.130:3000/PolarisCore/',
+  url: 'http://localhost:3000/Agenda/',
   urlSockect: 'http://54.242.102.130:3000',
   appIdMap: 'VV9O1VLSXz8pRNjg602T',
   appCodeMap: 'DezhHjCs8WgKEA_oyijc2Q',

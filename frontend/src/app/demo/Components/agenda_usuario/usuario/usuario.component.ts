@@ -31,7 +31,7 @@ export class UsuarioComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public funcionesGenerales: FuncionesGenerales,
     private app: AppComponent,
-    private utilitiesString: UtilitiesConfigString,
+    public utilitiesString: UtilitiesConfigString,
     private usuarioService: UserService,
     private adapter: UsuarioModelAdapter
   ) {

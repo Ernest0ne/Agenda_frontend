@@ -84,11 +84,9 @@ import { InicioComponent } from './demo/Components/ConfiguracionyAdministracion/
 import { MessageService } from 'primeng/api';
 import { AccessComponent } from './demo/Views/access.component';
 import { DataTableModule } from 'primeng/primeng';
-//import { FindAllTerminalComponent } from './demo/Components/ConfiguracionyAdministracion/terminals/find-all/find-all.component';
 import { UtilitiesConfigDates } from './demo/utilities/utilities-config-dates.service';
 import { UtilitiesConfigNumber } from './demo/utilities/utilities-config-number.service';
 import { UtilitiesConfigString } from './demo/utilities/utilities-config-string.service';
-
 import { UserIdleModule } from 'angular-user-idle';
 import { FileUploadModule } from 'ng2-file-upload';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -108,15 +106,7 @@ import { Svg } from './demo/svgPath/svg';
 import { MatTabsModule } from '@angular/material';
 import { AuthInterceptorService } from './demo/interceptors/auth-interceptor.service';
 import { Title } from '@angular/platform-browser';
-import { SaveTiqueteComponent } from './demo/Components/Tiquetes/save-tiquete/save-tiquete.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
-import { SaveRegistrosGeneralesComponent } from './demo/Components/Registros generales/save-registros-generales/save-registros-generales.component';
-import { SaveClienteComponent } from './demo/Components/Clientes/save-cliente/save-cliente.component';
-import { SaveEmpleadoComponent } from './demo/Components/Empleados/save-empleado/save-empleado.component';
-import { PayTiqueteComponent } from './demo/Components/Tiquetes/pay-tiquete/pay-tiquete.component';
-import { PriceTiqueteComponent } from './demo/Components/Tiquetes/price-tiquete/price-tiquete.component';
-import { SaveMaterialesComponent } from './demo/Components/Registros generales/save-materiales/save-materiales.component';
-import { NominaComponent } from './demo/Components/Empleados/nomina/nomina.component';
 import { ProfesoresComponent } from './demo/Components/agenda_profesores/profesores/profesores.component';
 import { ConfigTables } from './demo/utilities/config-tables.service';
 import { ExcelService } from './demo/utilities/excel.service';
@@ -127,6 +117,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction';
 import { NotasComponent } from './demo/Components/agenda_notas/notas/notas.component';
 import { UsuarioComponent } from './demo/Components/agenda_usuario/usuario/usuario.component'; // a plugin
+import { ShowLoaderComponent } from './demo/Components/Loader/show-loader/show-loader.component';
+import { BlockTemplateComponent } from './demo/utilities/block-template.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -244,19 +236,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         AppFooterComponent,
         EmptyDemoComponent,
         AccessComponent,
-        SaveTiqueteComponent,
-        SaveRegistrosGeneralesComponent,
-        SaveClienteComponent,
-        SaveEmpleadoComponent,
-        PayTiqueteComponent,
-        PriceTiqueteComponent,
-        SaveMaterialesComponent,
-        NominaComponent,
         ProfesoresComponent,
         AgendasComponent,
         CitasComponent,
         NotasComponent,
-        UsuarioComponent
+        UsuarioComponent,
+        ShowLoaderComponent,
+        BlockTemplateComponent
     ],
     providers: [
         Title,
