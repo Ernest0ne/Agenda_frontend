@@ -9275,7 +9275,8 @@ body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight {
 }
 
 .fc-scrollgrid-sync-table{
-    width: 90% !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: 500px !important;
 }
 
@@ -9347,4 +9348,8 @@ button.fc-next-button.fc-button.fc-button-primary {
     margin-left: 25%;
     height: 350px;
 
+}
+
+td .fc-daygrid-day {
+    width: 16% !important;
 }

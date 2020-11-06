@@ -76,7 +76,7 @@ export class CitasComponent implements OnInit {
       cit_hora_fin: new FormControl({ value: null, disabled: false }, [Validators.required]),
       cit_hora_inicio: new FormControl({ value: null, disabled: false }, [Validators.required]),
       cit_agenda: new FormControl({ value: null, disabled: false }, []),
-      cit_profesores: new FormControl({ value: null, disabled: false }, [Validators.required]),
+      cit_profesores: new FormControl({ value: null, disabled: false }),
       cit_lugar: new FormControl({ value: null, disabled: false }, [Validators.required]),
       cit_comentario: new FormControl({ value: null, disabled: false }, []),
       cit_calificacion: new FormControl({ value: null, disabled: false }, [])
